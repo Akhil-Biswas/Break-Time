@@ -1,0 +1,187 @@
+:root{
+    --primary-color:green;
+}
+*{
+    padding: 0;
+    margin: 0;
+    color: white;
+}
+
+#TopNavigationBar{
+    height: 50px;
+    margin: 0 0 30px 0;
+    padding: 0 10px 0 10px;
+    background-color: green;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+}
+#TopNavigationBar #logo {
+    display: flex;
+    align-items: center;
+    
+}
+#TopNavigationBar #logo img {
+    height: 25px;
+    border-radius: 50%;
+}
+#TopNavigationBar #logo p {
+    color: white;
+}
+
+#TopNavigationBar .icon{
+    height: 25px;
+}
+
+
+#recomendation{
+    height: 150px;
+    width: 100%;
+    background-color:;
+    display: none;
+}
+
+
+
+/*categories START*/
+#categories {
+    height:;
+    background-color: ;
+}
+
+#categories h3{
+    color: green;
+}
+#categories #categoriesBlocksContainer{
+    height:;
+    margin: 10px 0 0 0;
+    padding: 0 10px 5px 10px;
+    display: flex;
+    column-gap: 10px;
+    overflow-x: auto;
+    background-color: ;
+    
+}
+#categories #categoriesBlocksContainer .categoriesBlock{
+    height: 100px;
+    width: 90px;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: ;
+    
+    border-radius: 30% 30% 0 0;
+    border: 1px solid green;
+    overflow: hidden;
+    background-color: #068f43;
+}
+
+#categories #categoriesBlocksContainer .categoriesBlock img{
+    height: 50px;
+    width: 50px;
+    margin: 10px 0 10px 0;
+    border-radius: 50%;
+    background-color: white;
+}
+
+/*categories END*/
+
+#filter{
+    height: 50px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: white;
+}
+#filter img{
+    height: 30px;
+    width: 30px;
+}
+/*  START */
+#items {
+    height:;
+    background-color: blue;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    
+    
+}
+
+
+/* END */
+#BottomNavigationBar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background-color: green;
+    z-index: 1000;
+    align-content: center;
+}
+#BottomNavigationBar ul {
+    display: flex;
+    justify-content: space-around; /* equal spacing */
+    align-items: center;
+    margin: 0;
+    list-style: none;
+}
+
+#BottomNavigationBar ul li {
+    flex: 1;/* all take equal width */
+    text-align: center;
+}
+
+#BottomNavigationBar ul li a .BottomNavigationBarIcon {
+    width: 28px;           /* icon size */
+    cursor: pointer;
+    fill: white;
+}
+
+
+
+.Detail {
+    width: 200px;
+    height: 200px;
+    top: 10px;
+    right: 10px;
+    position: absolute;
+    background-color: #333;
+    padding-top: 0px;
+    z-index: 9999;
+    display: none;
+}
+.Detail #detailClose{
+    position: absolute;
+    height: 28px;
+    top: 10px;
+    right: 10px;
+}
+
+.Detail ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.Detail li {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.Detail a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    display: block;
+    padding: 10px;
+    transition: background 0.3s ease;
+}
+
+.Detail a:hover {
+    background: #ff9800;
+    color: #000;
+}

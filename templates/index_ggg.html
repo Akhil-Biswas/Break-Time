@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Break Time :Order food</title>
+    
+    <!-- Application Name -->
+    <meta name="apple-mobile-web-app-title" content="It's Break Time">
+    <meta name="application-name" content="Break Time">
+    <link rel="manifest" href="../static/manifest.json">
+    
+    <link rel="icon" href="../static/src/logo.jpg" type="image/jpg">
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="../static/items.css">
+</head>
+
+
+<body>
+    <nav id="TopNavigationBar">
+        <!--Nevigation bar-->
+        <div id="logo">
+            <img alt="logo"src="../static/src/logo.jpg">
+            <p>It's Break Time</p>
+
+        </div>
+        <div>
+            <img id="detailOpen"class="icon" alt="Detail"src="../static/src/menu-symbol-of-three-parallel-lines-svgrepo-com.svg">
+        </div>
+    </nav>
+    
+    
+    <section id="recomendation">
+        <p>Recomendation</p>
+        
+    </section>
+    
+    <section id="catagories">
+        <h3>Categories</h3>
+        <div id="catagoriesBlocksContainer">
+            <div class="catagoriesBlock">
+                <img src="/static/.images/categories/sandwich.png" alt="" />
+                <p>Sandwiches</p>
+            </div>
+            <div class="catagoriesBlock">
+                <img src="static/.images/categories/noodles.jpeg" alt="" />
+                <p>Noodles</p>
+            </div>
+            <div class="catagoriesBlock">
+                <img src="/static/.images/categories/Hotdog.jpg" alt="" />
+                <p>Hot Dogs</p>
+            </div>
+            <div class="catagoriesBlock">
+                <img src="static/.images/categories/bread.jpeg" alt="" />
+                <p>Bread</p>
+            </div>
+            <div class="catagoriesBlock">
+                <img src="static/.images/categories/roti.jpeg" alt="" />
+                <p>Roti</p>
+            </div>
+            <div class="catagoriesBlock">
+                <img src="static/.images/categories/rice.jpeg" alt="" />
+                <p>Rice Dishes</p>
+            </div>
+        </div>
+    </section>
+    
+    <section>
+        <div id="filter">
+          <img src="static/src/filter.svg" alt="filter" />
+        </div>
+        <div id="items">
+            <div class="itemCard">
+                <div class="itemCardPhoto">
+                    <img class="" src="/static/.images/items/sandwich.png" alt="item" />
+                </div>
+                <div class="itemCardDetails">
+                    <div class="priceAndfavourit">
+                        <span>
+                            <img class="" src="/static/src/favourite.svg" alt="favourite" alt="total favourite" height=""/>
+                            <span>0</span>
+                        </span>
+                        <p class="">₹ 10.00</p>
+                    </div>
+                    <div class="itemName">
+                        Samosa 
+                    </div>
+                    <div id="" class="" >
+                            <div>
+                                
+                            </div>
+                    </div>
+                    
+                </div>
+                <div class="itemType">
+                    <img class="" src="/static/src/veg.svg" alt="type"/>
+                </div>
+                <div class="itemFavourite">
+                    <img class="" src="/static/src/favourite.svg" alt="favourite" />
+                </div>
+            </div>
+            
+            <div class="itemCard">
+                <div class="itemCardPhoto">
+                    <img class="" src="/static/.images/items/noodles.jpeg" alt="item" />
+                </div>
+                <div class="itemCardDetails">
+                    <div class="priceAndfavourit">
+                        <span>
+                            <img class="" src="/static/src/favourite.svg" alt="favourite" alt="total favourite" height=""/>
+                            <span>0</span>
+                        </span>
+                        <p class="">₹ 10.00</p>
+                    </div>
+                    <div class="itemName">
+                        Samosa 
+                    </div>
+                    <div id="" class="" >
+                            <div>
+                                
+                            </div>
+                    </div>
+                    
+                </div>
+                <div class="itemType">
+                    <img class="" src="/static/src/veg.svg" alt="type"/>
+                </div>
+                <div class="itemFavourite">
+                    <img class="" src="/static/src/favourite.svg" alt="favourite" />
+                </div>
+            </div>
+            <div class="itemCard">
+                <div class="itemCardPhoto">
+                    <img class="" src="/static/.images/categories/Hotdog.jpg" alt="item" /> 
+                </div>
+                <div class="itemCardDetails">
+                    <div class="priceAndfavourit">
+                        <span>
+                            <img class="" src="/static/src/favourite.svg" alt="favourite" alt="total favourite" height=""/>
+                            <span>0</span>
+                        </span>
+                        <p class="">₹ 10.00</p>
+                    </div>
+                    <div class="itemName">
+                        Samosa 
+                    </div>
+                    <div id="" class="" >
+                            <div>
+                                
+                            </div>
+                    </div>
+                    
+                </div>
+                <div class="itemType">
+                    <img class="" src="/static/src/veg.svg" alt="type"/>
+                </div>
+                <div class="itemFavourite">
+                    <img class="" src="/static/src/favourite.svg" alt="favourite" />
+                </div>
+            </div>
+            
+            
+        </div>
+    </section>
+
+    <nav id="BottomNavigationBar">
+            <!--search bar, order , menu-->
+            <ul>
+                <li><a href="{{url_for('home')}}"><img class="BottomNavigationBarIcon" alt="Menu"src="../static/src/restaurant-menu.svg"></a></li>
+                <li><a href="{{url_for('favourite')}}"><img class="BottomNavigationBarIcon" alt="Favourite"src="../static/src/favourite.svg"></a></li>
+                <li><a href="{{url_for('search')}}"><img class="BottomNavigationBarIcon" alt="Search"src="../static/src/search.svg"></a></li>
+                <li><a href="{{url_for('cart')}}"><img class="BottomNavigationBarIcon" alt="Cart"src="../static/src/cart.svg"></a></li>
+                <li><a href="{{url_for('profile')}}"><img class="BottomNavigationBarIcon" alt="Profile"src="../static/src/profile-icon-png-910.png"></a></li>
+            </ul>
+    </nav>
+
+    <div class="Detail">
+        <img id="detailClose" class="" src="../static/src/close-x.svg" alt="close" />
+        <ul>
+            <li>
+                <a href="{{url_for('aboutus')}}">About Us</a>
+            </li>
+            <li>
+                <a href="/contribute">Report Problem</a>
+            </li>
+            <li>
+                <a href="/contectMe">Contect Me</a>
+            </li>
+        </ul>
+    </div>
+<script src="{{url_for('static', filename='script.js')}}"></script>
+</body>
+
+</html>

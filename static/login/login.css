@@ -1,0 +1,95 @@
+*{
+    
+}
+
+html, body{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F5F7FA;
+}
+form{
+    height: 500px;
+    width: 300px;
+    padding: 10px;
+    background-color: #4A90E2;
+}
+form div p {
+    text-align: center;
+    margin: 0 0 5px 0;
+}
+form #loginblock {
+    display: flex;
+    flex-direction: column;
+    align-items center;
+}
+form #loginblock legend{
+    text-align: center;
+}
+form #loginblock .inputfield{
+    margin: 30px 0 0 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+form #loginblock .inputfield img{
+    position: absolute;
+    height: 30px;
+    left: 0;
+    
+}
+form #loginblock .inputfield .errordisplay{
+    margin: 0;
+    visibility: hidden;
+}
+form #loginblock input{
+    width: 100%;
+    border: none;
+    outline: none;
+    border-bottom:1px solid black;
+    padding: 0 5px;
+    background-color: ;
+}
+
+#telephonefield{
+    
+}
+
+}
+#passwordfield{
+    
+}
+form #loginblock p{
+    text-align: right;
+}
+form #loginblock button{
+    height: 40px;
+    width: 70%;
+    margin: auto;
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    
+}
+
+#othersignup{
+    margin: 50px 0 50px 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: ;
+    
+}
+#othersignup img {
+    height: 30px;
+}
+#othersignup div{
+    width: 120px;
+    margin: 0 0 20px 0;
+    display: flex;
+    justify-content: space-between;
+    background-color: ;
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Break Time :Order food</title>
+    
+    <!-- Application Name -->
+    <meta name="apple-mobile-web-app-title" content="It's Break Time">
+    <meta name="application-name" content="Break Time">
+    <link rel="manifest" href={{url_for('static',filename='manifest.json')}}>
+    
+    <link rel="icon" href="../static/src/logo.jpg" type="image/jpg">
+    <link rel="stylesheet" href={{url_for('static',filename='style.css')}}>
+    <link rel="stylesheet" href={{url_for('static',filename='items.css')}}>
+</head>
+
+
+<body>
+    <nav id="TopNavigationBar">
+        <!--Nevigation bar-->
+        <div id="logo">
+            <img alt="logo"src={{url_for('static',filename='/src/logo.jpg')}}>
+            <p>Break Time</p>
+
+        </div>
+        <div>
+            <img id="detailOpen"class="icon" alt="Detail"src={{url_for('static' , filename='/src/menu-symbol-of-three-parallel-lines-svgrepo-com.svg')}}>
+        </div>
+    </nav>
+    
+    
+    <section id="recomendation">
+        <p>Recomendation</p>
+        
+    </section>
+    {% block categories %}
+    
+    {% endblock %}
+    
+    <section>
+        <div id="filter">
+          <img src={{url_for('static', filename='/src/filter.svg')}} alt="filter" />
+        </div>
+        {% block items %}
+        
+        {% endblock %}
+    </section>
+
+    <nav id="BottomNavigationBar">
+            <!--search bar, order , menu-->
+            <ul>
+                <li><a href="{{url_for('home')}}"><img class="BottomNavigationBarIcon" alt="Menu"src="../static/src/restaurant-menu.svg"></a></li>
+                <li><a href="{{url_for('favourite')}}"><img class="BottomNavigationBarIcon" alt="Favourite"src="../static/src/favourite.svg"></a></li>
+                <li><a href="{{url_for('search')}}"><img class="BottomNavigationBarIcon" alt="Search"src="../static/src/search.svg"></a></li>
+                <li><a href="{{url_for('cart')}}"><img class="BottomNavigationBarIcon" alt="Cart"src="../static/src/cart.svg"></a></li>
+                <li><a href="{{url_for('profile')}}"><img class="BottomNavigationBarIcon" alt="Profile"src={{url_for('static', filename='src/profile.svg')}}></a></li>
+            </ul>
+    </nav>
+
+    <div class="Detail">
+        <img id="detailClose" class="" src="../static/src/close-x.svg" alt="close" />
+        <ul>
+            <li>
+                <a href="{{url_for('aboutus')}}">About Us</a>
+            </li>
+            <li>
+                <a href="{{url_for('report')}}">Report Problem</a>
+            </li>
+            <li>
+                <a href="{{url_for('me')}}">Contect Me</a>
+            </li>
+        </ul>
+    </div>
+<script src="{{url_for('static', filename='script.js')}}"></script>
+</body>
+
+</html>

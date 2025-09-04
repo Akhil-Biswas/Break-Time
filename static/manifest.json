@@ -1,0 +1,25 @@
+{
+  "name": "It's Break Time",
+  "short_name": "Break Time",
+  "description": "Portfolio of Akhil Biswas, a Python enthusiast.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "https://opengraph.b-cdn.net/production/images/2b8f4cba-db78-42f9-994a-0ffefed65894.jpg?token=yciwHVLIgVX1KwGtZCDhTji7OMTg4Bcb6W1H2PGa8RE&height=500&width=500&expires=33292828978",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/Akhil-Biswas/Public/refs/heads/main/Image/Favicon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/Akhil-Biswas/Public/refs/heads/main/Image/Favicon.svg",
+      "type": "image/svg+xml"
+    }
+  ]
+}
