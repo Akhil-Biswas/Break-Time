@@ -1,3 +1,4 @@
+// store in localstorage
 function saveCartData(itemId, quantity) {
     // Get existing cart or initialize empty
     let cart = JSON.parse(localStorage.getItem("Cart")) || {};
@@ -15,7 +16,10 @@ function saveCartData(itemId, quantity) {
 
     console.log("Cart saved:", cart);
 }
+
 /*
+//sand data to server
+
 function sendCartData(itemId, quantity) {
     fetch("/update_cart", {
         method: "POST",
@@ -37,51 +41,39 @@ function sendCartData(itemId, quantity) {
 
     //.catch(error => console.error("Error:", error));
 }
+
 */
 
-// Detail menu
-const detailMenu = document.querySelector(".Detail");
-const detailOpen = document.querySelector("#detailOpen");
-const detailClose = document.querySelector("#detailClose");
-
-// Open menu
-detailOpen.addEventListener("click", () => {
-    detailMenu.style.display = "block";
-});
-
-// Close menu
-detailClose.addEventListener("click", () => {
-    detailMenu.style.display = "none";
-});
-
 // Select all addToCart containers
+let sevedItem= localStorage.getItem("Cart") || {};
+
 const carts = document.querySelectorAll(".addTocart");
 
 carts.forEach(cart => {
-    const itemCard = cart.closest(".itemCard"); // find parent card
+    const itemCard = cart.closest(".item"); // find parent card
     const itemId = itemCard.getAttribute("item-id");
 
     const removeItem = cart.querySelector(".removeItem");
     const quantity = cart.querySelector(".quantity");
     const addItem = cart.querySelector(".addItem");
+    const delItem = itemCard.querySelector(".delItem");
 
     let totalQuantity = JSON.parse(localStorage.getItem("Cart"))
 [itemId] ||0 ;   //first check in localstorage if not then quantity is 0
-
 
     function updateQuantity() {
         quantity.textContent = totalQuantity;
 
         console.log(itemId, totalQuantity);
-
         // store in localstorage
         saveCartData(itemId, totalQuantity);
         // send to server
         //sendCartData(itemId, totalQuantity);
 
         if (totalQuantity === 0) {
-            removeItem.style.display = "none";
-            quantity.style.display = "none";
+            itemCard.remove()
+            //removeItem.style.display = "none";
+            //quantity.style.display = "none";
         } else {
             removeItem.style.display = "inline-block";
             quantity.style.display = "inline-block";
@@ -108,6 +100,12 @@ carts.forEach(cart => {
             totalQuantity++;
             updateQuantity();
         }
+    });
+
+    // Delete button
+    delItem.addEventListener("click", () => {
+        totalQuantity = 0;
+        updateQuantity();
     });
 
     // Initialize

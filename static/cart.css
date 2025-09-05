@@ -104,9 +104,32 @@
 }
 
 #grendTotal {
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
     border-top: 2px solid black;
-    background-color: red;
+    background-color: black;
 }
+
+#grendTotal span {
+    padding: 0 20px;
+}
+
+#confirmOrder {
+    margin: 10px 0 50px 0;
+    display: flex;
+}
+
+#confirmOrder button{
+    height: 30px;
+    width: 50%;
+    margin: auto;
+    border: none;
+    border-radius: 30px;
+    background-color: green;
+}
+
+
 /*Same as base html & css */
 #BottomNavigationBar {
     position: fixed;
