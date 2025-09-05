@@ -18,7 +18,7 @@
 
 <body>
 <div id="cartlist">
-    <div class="item">
+    <div item-id = "1" class="item">
         <div class="pic">
             <img class="itemPic" src={{url_for('static', filename='.images/items/sandwich.png')}} alt="item" />
             <img class="itemType" src={{url_for('static', filename='src/veg.svg')}} alt="Food Type" />
@@ -38,7 +38,30 @@
             <p>₹10000</p>
         </div>
         <div class="removeItem">
-            <img src={{url_for('static', filename='src/delete-icon.svg')}} = alt="Remove Item" />
+            <img class= "delItem" src={{url_for('static', filename='src/delete-icon.svg')}} = alt="Remove Item" />
+        </div>
+    </div>
+     <div item-id = "2" class="item">
+        <div class="pic">
+            <img class="itemPic" src={{url_for('static', filename='.images/items/sandwich.png')}} alt="item" />
+            <img class="itemType" src={{url_for('static', filename='src/veg.svg')}} alt="Food Type" />
+        </div>
+        <div class="namePrice">
+            <p>Name of item</p>
+            <p>₹100</p>
+        </div>
+        <div class="quantity">
+            <div class="addTocart" >
+                <span class="removeItem"><img src={{url_for('static', filename='src/minus-circle.svg')}} alt="remove item" /></span>
+                <span class="quantity">0</span> 
+                <span class="addItem"><img src={{url_for('static', filename='src/plus-circle.svg')}} alt="add item"/></span>
+            </div> 
+        </div>
+        <div class="total">
+            <p>₹10000</p>
+        </div>
+        <div class="removeItem">
+            <img class= "delItem" src={{url_for('static', filename='src/delete-icon.svg')}} = alt="Remove Item" />
         </div>
     </div>
     
@@ -63,6 +86,7 @@
                 <li><a href="{{url_for('profile')}}"><img class="BottomNavigationBarIcon" alt="Profile"src={{url_for('static', filename='src/profile.svg')}}></a></li>
             </ul>
     </nav>
+<script src="{{url_for('static',filename='cart.js')}}" type="text/javascript" charset="utf-8"></script>
 </body>
 
 </html>
