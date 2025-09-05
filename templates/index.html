@@ -4,32 +4,151 @@
 {% endblock %}
 
 {% block style %}
-    <link rel="stylesheet" href="../static/style.css">
+<link rel="stylesheet" href={{url_for('static',filename='style.css')}}>
 {% endblock %}
 
 {% block recomendation %}
+<section id="recomendation">
     <p>Recomendation</p>
-    <br />
+</section>
 {% endblock %}
     
     
 {% block categories %}
-    <p>Categories</p>
-    <br />
+<section id="categories">
+<h3>Categories</h3>
+    <div id="categoriesBlocksContainer">
+            <div class="categoriesBlock">
+                <img src="{{url_for('static', filename='.images/categories/sandwich.png')}}" alt="" />
+                <p>Sandwiches</p>
+            </div>
+            
+            
+            <div class="categoriesBlock">
+                <img src="{{url_for('static', filename='.images/categories/noodles.jpeg')}}" alt="" />
+                <p>Noodles</p>
+            </div>
+            <div class="categoriesBlock">
+                <img src="{{url_for('static', filename='.images/categories/Hotdog.jpg')}}" alt="" />
+                <p>Hot Dogs</p>
+            </div>
+            <div class="categoriesBlock">
+                <img src="{{url_for('static', filename='.images/categories/bread.jpeg')}}" alt="" />
+                <p>Bread</p>
+            </div>
+            <div class="categoriesBlock">
+                <img src="{{url_for('static', filename='.images/categories/roti.jpeg')}}" alt="" />
+                <p>Roti</p>
+            </div>
+            <div class="categoriesBlock">
+                <img src="{{url_for('static', filename='.images/categories/rice.jpeg')}}" alt="" />
+                <p>Rice Dishes</p>
+            </div>
+    </div>
+</section>
 {% endblock %}
     
     
-{% block filter %}
-    <p>Filter</p>
-    <br />
-{% endblock %}
-    
-    
-{% block items %}
-    <p>Items</p>
-    <br />
+{% block content %}
+        <section>
+        <div id="filter">
+          <img src="static/src/filter.svg" alt="filter" />
+        </div>
+        <div id="items">
+            <div class="itemCard">
+                <div class="itemCardPhoto">
+                    <img class="" src="{{url_for('static', filename='.images/items/sandwich.png')}}" alt="item" />
+                </div>
+                <div class="itemCardDetails">
+                    <div class="priceAndfavourit">
+                        <span>
+                            <img class="" src="/static/src/favourite.svg" alt="favourite" alt="total favourite" height=""/>
+                            <span>0</span>
+                        </span>
+                        <p class="">₹ 10.00</p>
+                    </div>
+                    <div class="itemName">
+                        Sandwich 
+                    </div>
+                    <div class="addTocart" >
+                        <span class="removeItem"><img src={{url_for('static', filename='src/minus-circle.svg')}} alt="remove item" /></span>
+                        <span class="quantity">0</span> 
+                        <span class="addItem"><img src={{url_for('static', filename='src/plus-circle.svg')}} alt="add item"/></span>
+                    </div>
+
+                </div>
+                <div class="itemType">
+                    <img class="" src="/static/src/veg.svg" alt="type"/>
+                </div>
+                <div class="itemFavourite">
+                    <img class="" src="/static/src/favourite.svg" alt="favourite" />
+                </div>
+            </div>
+
+            <div class="itemCard">
+                <div class="itemCardPhoto">
+                    <img class="" src="{{url_for('static', filename='.images/items/noodles.jpeg')}}" alt="item" />
+                </div>
+                <div class="itemCardDetails">
+                    <div class="priceAndfavourit">
+                        <span>
+                            <img class="" src="/static/src/favourite.svg" alt="favourite" alt="total favourite" height=""/>
+                            <span>0</span>
+                        </span>
+                        <p class="">₹ 70.00</p>
+                    </div>
+                    <div class="itemName">
+                        Noodles 
+                    </div>
+                    <div class="addTocart" >
+                        <span class="removeItem"><img src={{url_for('static', filename='src/minus-circle.svg')}} alt="remove item" /></span>
+                        <span class="quantity">0</span> 
+                        <span class="addItem"><img src={{url_for('static', filename='src/plus-circle.svg')}} alt="add item"/></span>
+                    </div>
+
+                </div>
+                <div class="itemType">
+                    <img class="" src="/static/src/veg.svg" alt="type"/>
+                </div>
+                <div class="itemFavourite">
+                    <img class="" src="/static/src/favourite.svg" alt="favourite" />
+                </div>
+            </div>
+            <div class="itemCard">
+                <div class="itemCardPhoto">
+                    <img class="" src="{{url_for('static', filename='.images/items/Hotdog.jpg')}}" alt="item" /> 
+                </div>
+                <div class="itemCardDetails">
+                    <div class="priceAndfavourit">
+                        <span>
+                            <img class="" src="/static/src/favourite.svg" alt="favourite" alt="total favourite" height=""/>
+                            <span>0</span>
+                        </span>
+                        <p class="">₹ 50.00</p>
+                    </div>
+                    <div class="itemName">
+                        Hot Dogs 
+                    </div>
+                    <div class="addTocart" >
+                        <span class="removeItem"><img src={{url_for('static', filename='src/minus-circle.svg')}} alt="remove item" /></span>
+                        <span class="quantity">0</span> 
+                        <span class="addItem"><img src={{url_for('static', filename='src/plus-circle.svg')}} alt="add item"/></span>
+                    </div>
+
+                </div>
+                <div class="itemType">
+                    <img class="" src="/static/src/veg.svg" alt="type"/>
+                </div>
+                <div class="itemFavourite">
+                    <img class="" src="/static/src/favourite.svg" alt="favourite" />
+                </div>
+            </div>
+
+
+        </div>
+    </section>
 {% endblock %}
 
 {% block script %}
-    <script src="../static/script.js"></script>
+<script src="{{url_for('static', filename='script.js')}}"></script>
 {% endblock %}

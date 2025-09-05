@@ -2,3 +2,190 @@
     padding: 0;
     margin: 0;
 }
+
+#categories {
+    height:;
+    background-color: ;
+}
+
+#categories h3{
+    color: green;
+}
+#categories #categoriesBlocksContainer{
+    height:;
+    margin: 10px 0 0 0;
+    padding: 0 10px 5px 10px;
+    display: flex;
+    column-gap: 10px;
+    overflow-x: auto;
+    background-color: ;
+    
+}
+#categories #categoriesBlocksContainer .categoriesBlock{
+    height: 100px;
+    width: 90px;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: ;
+    
+    border-radius: 30% 30% 0 0;
+    border: 1px solid green;
+    overflow: hidden;
+    background-color: #068f43;
+}
+
+#categories #categoriesBlocksContainer .categoriesBlock img{
+    height: 50px;
+    width: 50px;
+    margin: 10px 0 10px 0;
+    border-radius: 50%;
+    background-color: white;
+}
+
+/*categories END*/
+
+#filter{
+    height: 50px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: white;
+}
+#filter img{
+    height: 30px;
+    width: 30px;
+}
+/*  START */
+#items {
+    height:;
+    margin:0 0 50px 0 ;
+    padding:10px 20px ;
+    color: black !important;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    
+}
+
+#items *{
+    color: black; !important
+}
+
+#items .itemCard {
+    height: 250;
+    width: 150px;
+    overflow: none;
+    position: relative;
+    background-color: #f0fff4;
+    box-shadow: 0 4px 10px rgba(0,128,0,0.1); 
+}
+
+#items .itemCard .itemCardPhoto{
+    height: 60%;
+    width: 100%;
+    padding:0 20x;
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    background-color: ;
+}
+
+#items .itemCard .itemCardPhoto img{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    
+}
+
+#items .itemCard .itemCardDetails{
+    height: ;
+    margin: 0 10px 0 10px;
+    padding: 5px 0 0 0;
+    align-items: center;
+    border-top:2px solid black;
+    background-color: ;
+}
+
+#items .itemCard .itemCardDetails .priceAndfavourit{
+    height: ;
+    padding: 0 2px 0 2px;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    background-color: ;
+}
+
+#items .itemCard .itemCardDetails .priceAndfavourit span{
+    display: flex;
+    align-items: center;
+    visibility: ;
+}
+
+#items .itemCard .itemCardDetails .priceAndfavourit span img{
+    height: 15px;
+    fill: red;
+}
+
+#items .itemCard .itemCardDetails .priceAndfavourit span p{
+    
+}
+#items .itemCard .itemType {
+    height: 50px;
+    width: 50%;
+    position:absolute;
+    top: 0px;
+    left: 0;
+    padding: 0 10px 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+#items .itemCard .itemType img{
+    height: 20px;
+    left: 10px;
+}
+
+#items .itemCard .itemName {
+    text-align: center;
+}
+
+#items .itemCard .itemFavourite {
+    height: 50px;
+    width: 50%;
+    position:absolute;
+    top: 0px;
+    right: 0;
+    padding: 0 10px 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+#items .itemCard .itemFavourite img{
+    height: 30px;
+}
+.addTocart {
+    height: 40px;
+    width: 60%;
+    margin: 5px auto;
+    display: flex;
+    align-items: center;
+    border: 1px solid green;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.addTocart span {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.addTocart span img {
+    height: 20px;
+}
