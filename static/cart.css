@@ -1,0 +1,141 @@
+* {
+    box-sizing: border-box; 
+
+}
+#cartlist{
+    height: ;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 50px 0 0 0;
+    background-color: pink;
+}
+#cartlist .item{
+    height: ;
+    padding: 5px;
+    display: flex;
+    gap: 5px;
+    justify-content: space-between;
+    background-color: gray;
+}
+
+#cartlist .item .pic{
+    height: ;
+    border: ;
+    background-color: ;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+#cartlist .item .pic .itemPic{
+    width: 100px;
+    border: ;
+    background-color: ;
+}
+
+#cartlist .item .pic .itemType{
+    height: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: ;
+    
+}
+
+#cartlist .item .namePrice{
+    display: flex;
+    flex: 2;
+    width: 300px;
+    flex-direction: column;
+    justify-content: center;
+    padding: ;
+    overflow: hidden;
+    
+}
+#cartlist .item .quantity{
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    
+}
+#cartlist .item .quantity{
+    width: 80px;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    
+}
+#cartlist .item .quantity .addTocart {
+    height: 40px;
+    width: ;
+    display: flex;
+    align-items: center;
+    border: 1px solid green;
+    border-radius: 20px;
+    overflow: hidden; /* keeps rounded edges clean */
+}
+
+#cartlist .item .quantity .addTocart span {
+    flex: 1;                  /* equal width for all spans */
+    text-align: center;       /* center text or icons */
+    display: flex;            /* flex inside span */
+    justify-content: center;  /* horizontal center */
+    align-items: center;      /* vertical center */
+    color: white;
+}
+
+#cartlist .item .quantity .addTocart span img {
+    height: 20px;
+}
+#cartlist .item .total {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+#cartlist .item .removeItem{
+    width: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+#cartlist .item .removeItem img {
+    height: 20px;
+}
+
+#grendTotal {
+    border-top: 2px solid black;
+    background-color: red;
+}
+/*Same as base html & css */
+#BottomNavigationBar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background-color: green;
+    z-index: 1000;
+    align-content: center;
+}
+#BottomNavigationBar ul {
+    display: flex;
+    justify-content: space-around; /* equal spacing */
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#BottomNavigationBar ul li {
+    flex: 1;/* all take equal width */
+    text-align: center;
+}
+
+#BottomNavigationBar ul li a .BottomNavigationBarIcon {
+    width: 28px;           /* icon size */
+    cursor: pointer;
+    fill: white;
+}
+
+
