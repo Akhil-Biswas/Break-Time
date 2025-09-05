@@ -1,0 +1,68 @@
+<DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Break Time :Order food</title>
+    
+    <!-- Application Name -->
+    <meta name="apple-mobile-web-app-title" content="It's Break Time">
+    <meta name="application-name" content="Break Time">
+    <link rel="manifest" href={{url_for('static',filename='manifest.json')}}>
+    
+    <link rel="icon" href="../static/src/logo.jpg" type="image/jpg">
+    <link rel="stylesheet" href={{url_for('static',filename='style.css')}}>
+    <link rel="stylesheet" href={{url_for('static',filename='cart.css')}}>
+</head>
+
+
+<body>
+<div id="cartlist">
+    <div class="item">
+        <div class="pic">
+            <img class="itemPic" src={{url_for('static', filename='.images/items/sandwich.png')}} alt="item" />
+            <img class="itemType" src={{url_for('static', filename='src/veg.svg')}} alt="Food Type" />
+        </div>
+        <div class="namePrice">
+            <p>Name of item</p>
+            <p>₹100</p>
+        </div>
+        <div class="quantity">
+            <div class="addTocart" >
+                <span class="removeItem"><img src={{url_for('static', filename='src/minus-circle.svg')}} alt="remove item" /></span>
+                <span class="quantity">0</span> 
+                <span class="addItem"><img src={{url_for('static', filename='src/plus-circle.svg')}} alt="add item"/></span>
+            </div> 
+        </div>
+        <div class="total">
+            <p>₹10000</p>
+        </div>
+        <div class="removeItem">
+            <img src={{url_for('static', filename='src/delete-icon.svg')}} = alt="Remove Item" />
+        </div>
+    </div>
+    
+</div>
+
+<div id="grendTotal">
+    <span>Total</span>
+    <span>₹100</span>
+</div>
+<div id="confirmOrder">
+    <button type="submit">Place Order</button>
+</div>
+
+
+<nav id="BottomNavigationBar">
+            <!--search bar, order , menu-->
+            <ul>
+                <li><a href="{{url_for('home')}}"><img class="BottomNavigationBarIcon" alt="Menu"src="../static/src/restaurant-menu.svg"></a></li>
+                <li><a href="{{url_for('favourite')}}"><img class="BottomNavigationBarIcon" alt="Favourite"src="../static/src/favourite.svg"></a></li>
+                <li><a href="{{url_for('search')}}"><img class="BottomNavigationBarIcon" alt="Search"src="../static/src/search.svg"></a></li>
+                <li><a href="{{url_for('cart')}}"><img class="BottomNavigationBarIcon" alt="Cart"src="../static/src/cart.svg"></a></li>
+                <li><a href="{{url_for('profile')}}"><img class="BottomNavigationBarIcon" alt="Profile"src={{url_for('static', filename='src/profile.svg')}}></a></li>
+            </ul>
+    </nav>
+</body>
+
+</html>

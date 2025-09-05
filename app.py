@@ -30,7 +30,7 @@ def search():
 @app.route("/Cart/")
 def cart():
     
-    return coming_soon
+    return render_template("cart.html")
     
 
 @app.route("/update_cart", methods=["POST"])
