@@ -1,6 +1,7 @@
 *{
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
 }
 
 #categories {
@@ -74,7 +75,7 @@
 }
 
 #items .itemCard {
-    height: 250;
+    min-height: 250px;
     width: 150px;
     overflow: none;
     position: relative;
@@ -83,9 +84,9 @@
 }
 
 #items .itemCard .itemCardPhoto{
-    height: 60%;
-    width: 100%;
-    padding:0 20x;
+    height: 150px;
+    width: 150px;
+    padding: 10px;
     display: flex;
     flex: 1;
     overflow: hidden;
@@ -95,8 +96,9 @@
 #items .itemCard .itemCardPhoto img{
     height: 100%;
     width: 100%;
-    object-fit: contain;
-    
+    object-fit: cover;
+    object-position: center;
+    border-radius: 5px;
 }
 
 #items .itemCard .itemCardDetails{
@@ -118,9 +120,8 @@
 }
 
 #items .itemCard .itemCardDetails .priceAndfavourit span{
-    display: flex;
     align-items: center;
-    visibility: ;
+    visibility: hidden;
 }
 
 #items .itemCard .itemCardDetails .priceAndfavourit span img{
@@ -129,7 +130,7 @@
 }
 
 #items .itemCard .itemCardDetails .priceAndfavourit span p{
-    
+
 }
 #items .itemCard .itemType {
     height: 50px;
@@ -185,7 +186,10 @@
     align-items: center;
     color: white;
 }
-
+.addTocart .removeItem,
+.addTocart .quantity {
+    display: none;
+}
 .addTocart span img {
     height: 20px;
 }
