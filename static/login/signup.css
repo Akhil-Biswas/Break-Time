@@ -1,0 +1,38 @@
+*{
+    
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: blue;
+}
+form{
+    height: 500px;
+    width: 300px;
+    display: flex;
+    flex-direction:column ;
+    background-color: pink;
+}
+form #otp{
+    background-color: white;
+}
+
+form #step1 {
+    background-color: red;
+    display: ;
+}
+
+form #step2 {
+    background-color: white;
+    display: ;
+}
+
+form #step3 {
+    background-color: red;
+    display: ;
+}
+form #step4 {
+    background-color: white;
+    display: ;
+}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Break Time :Order food</title>
+    
+    <!-- Application Name -->
+    <meta name="apple-mobile-web-app-title" content="It's Break Time">
+    <meta name="application-name" content="Break Time">
+    <link rel="manifest" href={{url_for('static',filename='manifest.json')}}>
+    
+    <link rel="icon" href="../static/src/logo.jpg" type="image/jpg">
+    <link rel="stylesheet" href={{url_for('static',filename='login/signup.css')}}>
+</head>
+
+
+<body>
+    <div class="">
+    <legend>Signup</legend>
+    <form id="signup" action="#" method="post">
+    <div class="" id="step0">
+        <label for="">Email</label>
+        <input type="email" name="email" id="Email" value="" placeholder="Email" required />
+    
+        <label for="tel">Mobile Number</label>
+        <input type="tel" name="tel" id="" value="" placeholder="Mobile Number" />
+        <button type="submit">Verify OTP</button>
+        <button type="submit">Next</button>
+    </div>
+    
+    <div class="" id="step1">
+        <label for="fname">First Name :</label>
+        <input type="text" name="fname" id="" value="" placeholder="First Name"required />
+
+        <label for="MName">Middle Name</label>
+        <input type="text" name="mname" id="MName" value="" placeholder="Middle Name"/>
+
+        <label for="LName">Last Name</label>
+        <input type="text" name="lname" id="LName" value="" placeholder="Last Name"required />
+        <button type="submit">Next</button>
+    </div>
+    <div class="" id="step2">
+        <label for="Department">Department</label>
+        <select name="departmentid" id="Department" required>
+        <option value="1">BCA</option>
+            <option value="0">BBA</option>
+        </select>
+        
+        <label for="Department">Semister</label>
+        <select name="semid" id="semister" required>
+        <option value="1">1st</option>
+            <option value="0">2nd</option>
+        </select>
+        
+        <label for="Department">Section</label>
+        <select name="sectionid" id="Section" required>
+            <option value="1">A</option>
+            <option value="2">B</option>
+        </select>
+        <button type="submit">next</button>
+    </div>
+    <div class="" id="step3">
+        <label for="password">Password</label>
+        <input type="password" name="pass" id="" value="" required />
+        <label for="password">Confirm Password</label>
+        <input type="password" name="pass" id="" value="" />
+        
+        <input type="checkbox" name="" id="" />
+        <button type="submit">Submit</button>
+    </div>
+    </form>
+    </div>
+<script src={{url_for('static',filename='login/signup.js')}} type="text/javascript" charset="utf-8"></script>
+</body>
+</html>
