@@ -15,7 +15,7 @@ def search():
     
 @app.route("/cart/")
 def cart():
-    return coming_soon
+    return render_template("cart.html")
 
 @app.route("/cr/")
 def crpage():
