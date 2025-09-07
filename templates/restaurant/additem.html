@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Break Time :Order food</title>
+    
+    <!-- Application Name -->
+    <meta name="apple-mobile-web-app-title" content="It's Break Time">
+    <meta name="application-name" content="Break Time">
+    <link rel="manifest" href={{url_for('static',filename='manifest.json')}}>
+    
+    <link rel="icon" href="../static/src/logo.jpg" type="image/jpg">
+    
+    <link rel="stylesheet" href={{url_for('static',filename='restaurant/additem.css')}}>
+</head>
+
+
+<body>
+    <form id="additem" action="#" method="Post" accept-charset="utf-8">
+        <div id="imageContainer">
+            <p id="errorDisplay">Error</p>
+            <p id="imageName">Only Except jpg , jpeg/Name or the file</p>
+            <label for="uploadfile">
+                <img id ="imagePreview" src={{url_for('static',filename='.images/items/default.jpg')}} alt="" />
+                <div id="lodar">
+                </div>
+            </label>
+            <input id="uploadfile" type="file" accept="image/jpg, image/jpeg" name="" value="" />
+            <p id="imageSize"></p>
+        </div>
+        <div id="mainform">
+            
+       
+        <div>
+            <label for="Item Name">Item Name</label>
+            <input type="text" name="" id="" value="" placeholder="Enter Item Name"/>
+        </div>
+
+        <div>
+            <label for="">price</label>
+            <input type="text" name="" id="" value="" placeholder="Enter Price"/>
+        </div>
+        <div class="">
+            <label for="">Type</label>
+            <select name="itemtype" id="" class="">
+            
+                <option value="Veg">Veg</option>
+                <option value="nonveg">Non Veg</option>
+            </select>
+            
+        </div>
+        <div>
+            <label for="">Category</label>
+            <input type="text" name="" id="" value="" placeholder="Category"/>
+        </div>
+       <div id="savebtn">
+           <button type="submit">Save</button>
+       </div>
+        </div>
+    </form>
+
+<nav id="BottomNavigationBar">
+            <!--search bar, order , menu-->
+            <ul>
+                <li><a href="{{url_for('home')}}"><img class="BottomNavigationBarIcon" alt="Menu"src="../static/src/restaurant-menu.svg"></a></li>
+                <li><a href="{{url_for('favourite')}}"><img class="BottomNavigationBarIcon" alt="Favourite"src="../static/src/favourite.svg"></a></li>
+                <li><a href="{{url_for('search')}}"><img class="BottomNavigationBarIcon" alt="Search"src="../static/src/search.svg"></a></li>
+                <li><a href="{{url_for('cart')}}"><img class="BottomNavigationBarIcon" alt="Cart"src="../static/src/cart.svg"></a></li>
+                <li><a href="{{url_for('profile')}}"><img class="BottomNavigationBarIcon" alt="Profile"src={{url_for('static', filename='src/profile.svg')}}></a></li>
+            </ul>
+    </nav>
+<script src="{{url_for('static',filename='restaurant/additem.js')}}" type="text/javascript" charset="utf-8"></script>
+</body>
+
+</html>
