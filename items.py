@@ -1,5 +1,7 @@
 import mysql.connector
 from config import Mysql
+from config import Folders
+from saveimage import getimage
 
 def connectToMysqlServer():
     '''Connect to MySQL using mysql config '''
@@ -105,8 +107,10 @@ class Items:
             items = cursor.fetchall()
             cursor.close()
             conn.close()
+            
+            folder = Folders.Items_Photo
             for item in items:
-                item["img"] = f"{item['item_id']}.jpeg"
+                item["img"] =getimage(folder, item['item_id'])
             return items
         except Exception as e :
             print(e)
