@@ -17,11 +17,11 @@ app.permanent_session_lifetime = timedelta(days=7)  # session expires in 7 days
 categories= [{"name": "Sandwich", "img":"sandwich.png"},{"name": "Noodles", "img":"noodles.jpeg"},{"name": "Hotdog", "img":"Hotdog.jpg"},{"name": "Bread", "img":"bread.jpeg"},{"name": "Roti", "img":"roti.jpeg"},{"name": "rice", "img":"Rice.jpeg"}]
 
 #items
-items = [{"itemid":"1","name": "Sandwich", "type":"veg","price":"30.00","noFev":"157","img":"sandwich.png"},{"itemid":"2","name": "Noodles", "type":"veg","price":"30.00","noFev":"4","img":"noodles.jpeg"},{"itemid":"3","name": "Hotdog", "type":"non_veg","price":"30.00","noFev":"40","img":"Hotdog.jpg"},{"itemid":"4","name": "Bread", "type":"veg","price":"15.50","noFev":"84","img":"bread.jpeg"},{"itemid":"5","name": "Roti", "type":"veg","price":"10.00","noFev":"14","img":"roti.jpeg"}]
+
 
 @app.route("/")
 def home():
-    return render_template("index.html", categories=categories, items=items)
+    return render_template("index.html", categories=categories, items=Items.getAllItem())
     
 @app.route("/Favourite/")
 def favourite():
