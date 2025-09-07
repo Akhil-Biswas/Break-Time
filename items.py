@@ -69,8 +69,9 @@ class Items:
             print(f'velues are : \n    Name {self.itemName},\n    Price : {self.itemPrice}\n    category: {self.category} \n    veg Flag: {self.vegFlag}\n    Restaurant: {self.restaurant}')
             
             cursor.execute(query,values)
-            print(f"{self.itemName} stored to Database ")
+            print(f"Item {cursor.lastrowid} stored to Database ")
             
+            return cursor.lastrowid  #return auto_increment velue from database  (for save image with rename to item id)
         except Exception as e:
             print(e)
         finally:
