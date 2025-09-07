@@ -66,14 +66,18 @@ class Items:
             self.vegFlag,
             self.restaurant
             )
+            print(f'velues are : \n    Name {self.itemName},\n    Price : {self.itemPrice}\n    category: {self.category} \n    veg Flag: {self.vegFlag}\n    Restaurant: {self.restaurant}')
+            
             cursor.execute(query,values)
             print(f"{self.itemName} stored to Database ")
+            
         except Exception as e:
             print(e)
         finally:
             conn.commit()
             cursor.close()
             conn.close()
+            print("+++++++++++++++++++++++++++++")
     @staticmethod
     def getAllItem():
         try:
@@ -90,41 +94,41 @@ class Items:
         finally:
             cursor.close()
             conn.close()
-        
-item1 = Items(
-    itemId = None,
-    itemName = "samosa",
-    itemPrice = 10,
-    vegFlag = "1",
-    category = 1,
-    restaurant = 1
-).saveItemInDatabase
+if __name__ == "__main__ ":   
+    item1 = Items(
+        itemId = None,
+        itemName = "samosa",
+        itemPrice = 10,
+        vegFlag = "1",
+        category = 1,
+        restaurant = 1
+    ).saveItemInDatabase
 
-item2 = Items(
-    itemId = None,
-    itemName = "Roti",
-    itemPrice = 10,
-    vegFlag = 1,
-    category ='1',
-    restaurant = 1
-).saveItemInDatabase()
+    item2 = Items(
+        itemId = None,
+        itemName = "Roti",
+        itemPrice = 10,
+        vegFlag = 1,
+        category ='1',
+        restaurant = 1
+    ).saveItemInDatabase()
 
-#for display in html
-items=Items.getAllItem()
+    #for display in html
+    items=Items.getAllItem()
 
-for item in items:
-    itemId = item[0],
-    itemName = item[1],
-    itemPrice = item[2],
-    vegFlag = item[3],
-    category = item[4],
-    restaurant = item[5]
+    for item in items:
+        itemId = item[0],
+        itemName = item[1],
+        itemPrice = item[2],
+        vegFlag = item[3],
+        category = item[4],
+        restaurant = item[5]
     
-    print(item)
-    print(itemName)
-    print(itemPrice)
-    print(vegFlag)
-    print('=======')
+        print(item)
+        print(itemName)
+        print(itemPrice)
+        print(vegFlag)
+        print('=======')
   
- # {"itemid":"1","name": "Sandwich", "type":"veg","price":"30.00","noFev":"157","img":"sandwich.png"}
+     # {"itemid":"1","name": "Sandwich", "type":"veg","price":"30.00","noFev":"157","img":"sandwich.png"}
  
