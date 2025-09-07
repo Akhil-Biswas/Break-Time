@@ -1,4 +1,4 @@
-<DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,23 +11,23 @@
     <link rel="manifest" href={{url_for('static',filename='manifest.json')}}>
 
     <link rel="icon" href="../static/src/logo.jpg" type="image/jpg">
-    <link rel="stylesheet" href={{url_for('static',filename='style.css')}}>
+    <link rel="stylesheet" href={{url_for('static',filename='base.css')}}>
     <link rel="stylesheet" href={{url_for('static',filename='cart.css')}}>
 </head>
 
 
 <body>
 <div id="cartlist">
-    <div class="item">
+    <div item-id="1" class="item">
         <div class="pic">
             <img class="itemPic" src={{url_for('static', filename='.images/items/sandwich.png')}} alt="item" />
             <img class="itemType" src={{url_for('static', filename='src/veg.svg')}} alt="Food Type" />
         </div>
         <div class="namePrice">
-            <p>Name of item</p>
-            <p>₹100</p>
+            <p class="itemName">Name of item</p>
+            <p class="itemPrice">₹100</p>
         </div>
-        <div class="quantity">
+        <div class="quantitycontainer">
             <div class="addTocart" >
                 <span class="removeItem"><img src={{url_for('static', filename='src/minus-circle.svg')}} alt="remove item" /></span>
                 <span class="quantity">0</span>
@@ -41,16 +41,17 @@
             <img src={{url_for('static', filename='src/delete-icon.svg')}} = alt="Remove Item" />
         </div>
     </div>
-        <div class="item">
+    
+    <div item-id="2" class="item">
         <div class="pic">
             <img class="itemPic" src={{url_for('static', filename='.images/items/sandwich.png')}} alt="item" />
             <img class="itemType" src={{url_for('static', filename='src/veg.svg')}} alt="Food Type" />
         </div>
         <div class="namePrice">
-            <p>Name of item</p>
-            <p>₹100</p>
+            <p class="itemName">Name of item</p>
+            <p class="itemPrice">₹100</p>
         </div>
-        <div class="quantity">
+        <div class="quantitycontainer">
             <div class="addTocart" >
                 <span class="removeItem"><img src={{url_for('static', filename='src/minus-circle.svg')}} alt="remove item" /></span>
                 <span class="quantity">0</span>
@@ -59,6 +60,30 @@
         </div>
         <div class="total">
             <p>₹10000</p>
+        </div>
+        <div class="removeItem">
+            <img src={{url_for('static', filename='src/delete-icon.svg')}} = alt="Remove Item" />
+        </div>
+    </div>
+    
+    <div item-id="3" class="item">
+        <div class="pic">
+            <img class="itemPic" src={{url_for('static', filename='.images/items/sandwich.png')}} alt="item" />
+            <img class="itemType" src={{url_for('static', filename='src/veg.svg')}} alt="Food Type" />
+        </div>
+        <div class="namePrice">
+            <p class="itemName">Name of item</p>
+            <p class="itemPrice">₹100</p>
+        </div>
+        <div class="quantitycontainer">
+            <div class="addTocart" >
+                <span class="removeItem"><img src={{url_for('static', filename='src/minus-circle.svg')}} alt="remove item" /></span>
+                <span class="quantity">1</span>
+                <span class="addItem"><img src={{url_for('static', filename='src/plus-circle.svg')}} alt="add item"/></span>
+            </div>
+        </div>
+        <div class="total">
+            <p>₹100</p>
         </div>
         <div class="removeItem">
             <img src={{url_for('static', filename='src/delete-icon.svg')}} = alt="Remove Item" />
@@ -66,12 +91,14 @@
     </div>
 </div>
 
-<div id="grendTotal">
-    <span>Total</span>
-    <span>₹100</span>
-</div>
 <div id="confirmOrder">
-    <button type="submit">Place Order</button>
+    <div id="grendTotal">
+        <span>Total</span>
+        <span>₹200000</span>
+    </div>
+    <div id="orderSubmitBtn">
+        <button type="submit">Place Order</button>
+    </div>
 </div>
 
 

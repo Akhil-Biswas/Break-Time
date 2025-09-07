@@ -1,6 +1,6 @@
 * {
     box-sizing: border-box;
-
+    color: black;
 }
 #cartlist{
     height: ;
@@ -8,15 +8,16 @@
     flex-direction: column;
     gap: 10px;
     margin: 50px 0 0 0;
-    background-color: pink;
+    background-color: rgb(0,0,0,0.1);
 }
 #cartlist .item{
-    height: ;
+    min-height: 70px;
     padding: 5px;
     display: flex;
     gap: 5px;
     justify-content: space-between;
-    background-color: gray;
+    background-color: rgb(240,255,244);
+    box-shadow: 1px 0 10px rgba(0, 255, 0, 0.5);
 }
 
 #cartlist .item .pic{
@@ -51,18 +52,14 @@
     padding: ;
     overflow: hidden;
 }
-#cartlist .item .quantity{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-#cartlist .item .quantity{
+
+#cartlist .item .quantitycontainer{
     width: 80px;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
-#cartlist .item .quantity .addTocart {
+#cartlist .item .quantitycontainer .addTocart {
     height: 40px;
     width: ;
     display: flex;
@@ -72,16 +69,15 @@
     overflow: hidden;
 }
 
-#cartlist .item .quantity .addTocart span {
+#cartlist .item .quantitycontainer .addTocart span {
     flex: 1;
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
 }
 
-#cartlist .item .quantity .addTocart span img {
+#cartlist .item .quantitycontainer .addTocart img {
     height: 20px;
 }
 #cartlist .item .total {
@@ -99,12 +95,12 @@
     height: 20px;
 }
 
-#grendTotal {
+#confirmOrder #grendTotal {
     margin: 10px 0;
     display: flex;
     justify-content: space-between;
     border-top: 2px solid black;
-    background-color: red;
+    background-color: black;
 }
 #confirmOrder #grendTotal span {
     padding: 0 20px;
