@@ -69,11 +69,11 @@ def additem():
         vegFlag = request.form['vegFlag'],
         category = 1,
         restaurant = 1
-        ).saveItemInDatabase()
+        ).saveItemInDatabase() #now item store item id
         
-       # acess file object
+       # access file object
         file = request.files['itemImage']
-        fileName = saveimage(app.config["FOLDER_NAME"],file)
+        fileName = saveimage(app.config["FOLDER_NAME"],file,item)
        
     return render_template("restaurant/additem.html")
 
