@@ -85,13 +85,13 @@
     flex-direction: column;
     justify-content: center;
 }
-#cartlist .item .removeItem{
+#cartlist .item .delItem{
     width: 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
-#cartlist .item .removeItem img {
+#cartlist .item .delItem img {
     height: 20px;
 }
 
