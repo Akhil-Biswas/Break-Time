@@ -12,8 +12,8 @@
     <p>Recomendation</p>
 </section>
 {% endblock %}
-    
-    
+
+
 {% block categories %}
 <section id="categories">
 <h3>Categories</h3>
@@ -47,15 +47,15 @@
     </div>
 </section>
 {% endblock %}
-    
-    
+
+
 {% block content %}
         <section>
         <div id="filter">
           <img src="static/src/filter.svg" alt="filter" />
         </div>
         <div id="items">
-            <div class="itemCard">
+            <div item-id="1" class="itemCard">
                 <div class="itemCardPhoto">
                     <img class="" src="{{url_for('static', filename='.images/items/sandwich.png')}}" alt="item" />
                 </div>
@@ -85,7 +85,7 @@
                 </div>
             </div>
 
-            <div class="itemCard">
+            <div item-id="2"class="itemCard">
                 <div class="itemCardPhoto">
                     <img class="" src="{{url_for('static', filename='.images/items/noodles.jpeg')}}" alt="item" />
                 </div>
@@ -114,7 +114,8 @@
                     <img class="" src="/static/src/favourite.svg" alt="favourite" />
                 </div>
             </div>
-            <div class="itemCard">
+            
+            <div item-id="3" class="itemCard">
                 <div class="itemCardPhoto">
                     <img class="" src="{{url_for('static', filename='.images/items/Hotdog.jpg')}}" alt="item" /> 
                 </div>
@@ -143,8 +144,6 @@
                     <img class="" src="/static/src/favourite.svg" alt="favourite" />
                 </div>
             </div>
-
-
         </div>
     </section>
 {% endblock %}
