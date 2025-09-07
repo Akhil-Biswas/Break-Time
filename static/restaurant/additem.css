@@ -1,0 +1,117 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+#imageContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0 20px 0;
+}
+#additem  #mainform{
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+#additem  #mainform div{
+    display: flex;
+    flex-direction: column;
+}#imageContainer #errorDisplay,#imageName,#imageSize{
+    visibility: hidden;
+}
+#additem  div label{
+    overflow: hidden;
+    object-fit: cover;
+}
+#additem  input,select{
+    width: 200px;
+    height: 30px;
+    margin: ;
+}
+
+#additem #imageContainer label{
+    height: 200px;
+    width: 200px;
+    position: relative;
+}
+#additem #imageContainer label #lodar{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    border: 5px solid white;
+    border-top: 5px solid green;
+    animation: spin 5s infinite;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }100% {
+    transform: rotate(360deg);
+  }
+}
+
+#additem #imageContainer label img{
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    object-position: center;
+    object-fit: cover;
+}
+
+
+#additem input[type="file"]{
+    display: none;
+}
+
+#additem #savebtn{
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+#additem #savebtn button {
+    margin: auto;
+    background-color: green;
+    width: 60%;
+    height: 40px;
+    border: none;
+    border-radius: 30px;
+}
+/*Same as base html & css */
+#BottomNavigationBar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background-color: green;
+    z-index: 1000;
+    align-content: center;
+}
+#BottomNavigationBar ul {
+    display: flex;
+    justify-content: space-around; /* equal spacing */
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#BottomNavigationBar ul li {
+    flex: 1;/* all take equal width */
+    text-align: center;
+}
+
+#BottomNavigationBar ul li a .BottomNavigationBarIcon {
+    width: 28px;           /* icon size */
+    cursor: pointer;
+    fill: white;
+}
+
+
