@@ -17,7 +17,7 @@
 
 
 <body>
-    <form id="additem" action="#" method="Post" accept-charset="utf-8">
+    <form id="additem" action="#" method="POST" accept-charset="utf-8" enctype="multipart/form-data">
         <div id="imageContainer">
             <p id="errorDisplay">Error</p>
             <p id="imageName">Only Except jpg , jpeg/Name or the file</p>
@@ -26,7 +26,7 @@
                 <div id="lodar">
                 </div>
             </label>
-            <input id="uploadfile" type="file" accept="image/jpg, image/jpeg" name="" value="" />
+            <input id="uploadfile" type="file" accept="image/jpg, image/jpeg" name="itemImage" value="" />
             <p id="imageSize"></p>
         </div>
         <div id="mainform">
@@ -34,25 +34,25 @@
        
         <div>
             <label for="Item Name">Item Name</label>
-            <input type="text" name="" id="" value="" placeholder="Enter Item Name"/>
+            <input type="text" name="itemName" id="" value="" placeholder="Enter Item Name"/>
         </div>
 
         <div>
             <label for="">price</label>
-            <input type="text" name="" id="" value="" placeholder="Enter Price"/>
+            <input type="number" name="itemPrice" id="" value="" placeholder="Enter Price"/>
         </div>
         <div class="">
             <label for="">Type</label>
-            <select name="itemtype" id="" class="">
+            <select name="vegFlag" id="" class="">
             
-                <option value="Veg">Veg</option>
-                <option value="nonveg">Non Veg</option>
+                <option value="0">Veg</option>
+                <option value="1">Non Veg</option>
             </select>
             
         </div>
         <div>
             <label for="">Category</label>
-            <input type="text" name="" id="" value="" placeholder="Category"/>
+            <input type="text" name="" id="" value="" placeholder="Coming soon..."/>
         </div>
        <div id="savebtn">
            <button type="submit">Save</button>

@@ -4,7 +4,10 @@ from flask import redirect
 from flask import session
 from flask import jsonify
 from db import User, Login
+from items import Items
+from saveimage import saveimage
 from datetime import timedelta
+from config import Folders
 app = Flask(__name__)
 
 app.secret_key ="namaste"
@@ -53,6 +56,26 @@ def crpage():
 @app.route("/restaurant/")
 def restaurantpage():
     return render_template("restaurant/index.html")
+    
+@app.route("/restaurant/additems",methods =["GET", "POST"])
+def additem():
+    app.config["FOLDER_NAME"] = Folders.Items_Photo
+    if request.method =="POST":
+    
+        item = Items(
+        itemId = None, #Database will autometic genarate (By Autoincreament)
+        itemName = request.form['itemName'],
+        itemPrice = request.form['itemPrice'],
+        vegFlag = request.form['vegFlag'],
+        category = 1,
+        restaurant = 1
+        ).saveItemInDatabase()
+        
+       # acess file object
+        file = request.files['itemImage']
+        fileName = saveimage(app.config["FOLDER_NAME"],file)
+       
+    return render_template("restaurant/additem.html")
 
 # other
 coming_soon = '<div style="display:flex;justify-content:center;align-items:center;height:100vh;"><h1>Coming Soon......</h1></div> '
