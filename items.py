@@ -30,7 +30,7 @@ class Items:
         #defult velue for get item
         self.isfev = False  #only for login user 
         self.totalFev = 0
-        
+    
     def saveItemInDatabase(self):
         try :
             conn= connectToMysqlServer()
@@ -66,65 +66,73 @@ class Items:
             self.vegFlag,
             self.restaurant
             )
+            print(f'velues are : \n    Name {self.itemName},\n    Price : {self.itemPrice}\n    category: {self.category} \n    veg Flag: {self.vegFlag}\n    Restaurant: {self.restaurant}')
+            
             cursor.execute(query,values)
-            print(f"{self.itemName} stored to Database ")
+            print(f"Item {cursor.lastrowid} stored to Database ")
+            
+            return cursor.lastrowid  #return auto_increment velue from database  (for save image with rename to item id)
         except Exception as e:
             print(e)
         finally:
             conn.commit()
             cursor.close()
             conn.close()
+            print("+++++++++++++++++++++++++++++")
     @staticmethod
     def getAllItem():
         try:
             conn= connectToMysqlServer()
-            cursor = conn.cursor()
+            cursor = conn.cursor(dictionary=True)
             cursor.execute(f"USE {Mysql.MYSQL_DATABASE};")
             
-            query = "SELECT * FROM items"
+            query = '''
+                SELECT items.item_id,
+                items.name,
+                items.price,
+                food_type.type_name,
+                categories.category_name,
+                restaurants.restaurant_name
+                FROM   items
+                JOIN food_type
+                ON items.veg_flag = food_type.type_id
+                JOIN categories
+                ON items.category = categories.category_id
+                JOIN restaurants
+                ON items.restaurant = restaurants.restaurant_id; 
+                '''
             cursor.execute(query)
             items = cursor.fetchall()
+            cursor.close()
+            conn.close()
+            for item in items:
+                item["img"] = f"{item['item_id']}.jpeg"
             return items
         except Exception as e :
             print(e)
-        finally:
-            cursor.close()
-            conn.close()
         
-item1 = Items(
-    itemId = None,
-    itemName = "samosa",
-    itemPrice = 10,
-    vegFlag = "1",
-    category = 1,
-    restaurant = 1
-).saveItemInDatabase
+if __name__ == "__main__":
+    item1 = Items(
+        itemId = None,
+        itemName = "samosa",
+        itemPrice = 10,
+        vegFlag = "1",
+        category = 1,
+        restaurant = 1
+    ).saveItemInDatabase
 
-item2 = Items(
-    itemId = None,
-    itemName = "Roti",
-    itemPrice = 10,
-    vegFlag = 1,
-    category ='1',
-    restaurant = 1
-).saveItemInDatabase()
+    item2 = Items(
+        itemId = None,
+        itemName = "Roti",
+        itemPrice = 10,
+        vegFlag = 1,
+        category ='1',
+        restaurant = 1
+    ).saveItemInDatabase
 
-#for display in html
-items=Items.getAllItem()
-
-for item in items:
-    itemId = item[0],
-    itemName = item[1],
-    itemPrice = item[2],
-    vegFlag = item[3],
-    category = item[4],
-    restaurant = item[5]
-    
-    print(item)
-    print(itemName)
-    print(itemPrice)
-    print(vegFlag)
-    print('=======')
+    #for display in html
+    items=Items.getAllItem()
+    print(items)
   
- # {"itemid":"1","name": "Sandwich", "type":"veg","price":"30.00","noFev":"157","img":"sandwich.png"}
+     # {"itemid":"1","name": "Sandwich", "type":"veg","price":"30.00","noFev":"157","img":"sandwich.png"}
  
