@@ -1,5 +1,5 @@
 // store in localstorage
-function saveCartData(itemId, quantity) {
+function saveCartData(itemId,quantity) {
     // Get existing cart or initialize empty
     let cart = JSON.parse(localStorage.getItem("Cart")) || {};
 
@@ -8,7 +8,7 @@ function saveCartData(itemId, quantity) {
         delete cart[itemId];
     } else {
         // Otherwise add/update the item
-        cart[itemId] = quantity;
+        cart[itemId].quantity= quantity;
     }
 
     // Save updated cart back to localStorage
@@ -43,37 +43,103 @@ function sendCartData(itemId, quantity) {
 }
 
 */
+function createItemCard(item) {
+    const itemCard = document.createElement("div");
+    itemCard.setAttribute("item-id", item.id);
+    itemCard.classList.add("item");
 
+    itemCard.innerHTML = `
+        <div class="pic">
+            <img class="itemPic" src="${item.image}" alt="item" />
+            <img class="itemType" src="../static/src/${item.type}.svg" alt="${item.type}" />
+        </div>
+        <div class="namePrice">
+            <p class="itemName">${item.name}</p>
+            <p class ="itemPrice">₹${item.price}</p>
+        </div>
+        <div class="quantitycontainer">
+            <div class="addTocart">
+                <span class="removeItem">
+                    <img src="../static/src/minus-circle.svg" alt="remove item" />
+                </span>
+                <span class="quantity">0</span> 
+                <span class="addItem">
+                    <img src="../static/src/plus-circle.svg" alt="add item"/>
+                </span>
+            </div> 
+        </div>
+        <div class="total">
+            <p>₹0</p>
+        </div>
+        <div class="removeItem">
+            <img class="delItem" src="../static/src/delete-icon.svg" alt="Remove Item" />
+        </div>
+    `;
+
+    return itemCard;
+}
+
+function createConfirmBtn(grandTotalPrice){
+    console.info(grandTotalPrice)
+    
+    const confirmOrder = document.querySelector("#confirmOrder");
+    confirmOrder.innerHTML = `
+    <div id="grendTotal">
+        <span>Total</span>
+        <span>₹${grandTotalPrice}</span>
+    </div>
+    <div id="orderSubmitBtn">
+        <button type="submit">Place Order
+        </button>
+    </div>`
+}
 // Select all addToCart containers
-let sevedItem= localStorage.getItem("Cart") || {};
+let sevedItem = JSON.parse(localStorage.getItem("Cart"));
+let grandTotalPrice = 0
 
-const carts = document.querySelectorAll(".addTocart");
-
-carts.forEach(cart => {
-    const itemCard = cart.closest(".item"); // find parent card
+function cartlogic(itemCard,sevedItem){
     const itemId = itemCard.getAttribute("item-id");
+    const itemName = itemCard.querySelector(".itemName").textContent.trim();
+    const itemType = itemCard.querySelector(".itemType").alt;
+    const itemPic = itemCard.querySelector(".itemPic").src;
+    const cartbtn = itemCard.querySelector(".addTocart");
 
-    const removeItem = cart.querySelector(".removeItem");
-    const quantity = cart.querySelector(".quantity");
-    const addItem = cart.querySelector(".addItem");
+    const removeItem = cartbtn.querySelector(".removeItem");
+    const quantity = cartbtn.querySelector(".quantity");
+    const addItem = cartbtn.querySelector(".addItem");
+    const totalPrice = itemCard.querySelector(".total p");
     const delItem = itemCard.querySelector(".delItem");
 
-    let totalQuantity = JSON.parse(localStorage.getItem("Cart"))
-[itemId] ||0 ;   //first check in localstorage if not then quantity is 0
-
+    let cartdata = JSON.parse(localStorage.getItem("Cart"))
+    let totalQuantity = cartdata[itemId].quantity ||0 ; //first check in localstorage if not then quantity is 0
+    
+    // calculte price of the item Client side 
+    const itemPriceDisplay = itemCard.querySelector(".itemPrice");
+    const itemPrice= parseFloat(itemPriceDisplay.textContent.replace('₹',''));
+    
+    
+    const totalItemPrice =itemPrice*totalQuantity;
+    //uptdate price 
+    function updatePrice(){
+        totalPrice.textContent = `₹${itemPrice * totalQuantity}`;
+    }
+    
     function updateQuantity() {
         quantity.textContent = totalQuantity;
-
+        // updated price
+            updatePrice();
+            
+            
         console.log(itemId, totalQuantity);
         // store in localstorage
-        saveCartData(itemId, totalQuantity);
+        saveCartData(itemId,totalQuantity);
+        
         // send to server
         //sendCartData(itemId, totalQuantity);
 
         if (totalQuantity === 0) {
             itemCard.remove()
-            //removeItem.style.display = "none";
-            //quantity.style.display = "none";
+            document.querySelector("#confirmOrder").style.display ="none"
         } else {
             removeItem.style.display = "inline-block";
             quantity.style.display = "inline-block";
@@ -99,6 +165,7 @@ carts.forEach(cart => {
         if (totalQuantity > 0) {
             totalQuantity++;
             updateQuantity();
+            updatePrice();
         }
     });
 
@@ -110,4 +177,34 @@ carts.forEach(cart => {
 
     // Initialize
     updateQuantity();
+}
+
+window.addEventListener("load", () => {
+    const savedCart = JSON.parse(localStorage.getItem("Cart")) || {};
+    const container = document.getElementById("cartlist");
+
+    if (Object.keys(savedCart).length > 0) {
+      
+        document.querySelector("#emptyCartDisplay").style.display = 'none'
+        
+        // There are items in the cart, create cards
+        Object.entries(savedCart).forEach(([id, item]) => {
+            const itemCard = createItemCard({
+                id: id,
+                name: item.itemName,
+                price: item.itemPrice,
+                type: item.itemType,
+                quantity: item.quantity,
+                image: item.itemPic // replace with actual or placeholder image
+            });
+            
+            container.appendChild(itemCard);
+            cartlogic(itemCard);
+            grandTotalPrice +=parseFloat(item.itemPrice*item.quantity);
+    
+        });
+        createConfirmBtn(grandTotalPrice);
+    } else {
+        document.querySelector("#emptyCartDisplay").style.display = 'flex'
+    }
 });

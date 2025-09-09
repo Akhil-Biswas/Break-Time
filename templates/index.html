@@ -44,18 +44,19 @@
 
 {% block items %}
 <div id="items">
+    {% if items %}
     {% for item in items %}
-        <div item-id="{{item.itemid}}" class="itemCard">
+        <div item-id="{{item.item_id}}" item_type ={{item.type_name}} class="itemCard">
             <div class="itemCardPhoto">
-                <img class="" src={{url_for('static',filename='.images/items/'~item.img)}} alt="item" />
+                <img class="itemPic" src={{url_for('static',filename='.images/items/'~item.img)}} alt="item" />
                 </div>
                 <div class="itemCardDetails">
                     <div class="priceAndfavourit">
                         <span>
-                            <img class="" src="/static/src/favourite.svg" alt="favourite" alt="total favourite" height=""/>
+                            <img class=""  src="/static/src/favourite.svg" alt="favourite" alt="total favourite" height=""/>
                             <span>{{ item.noFev }}</span>
                         </span>
-                        <p class="">₹ {{ item.price }}</p>
+                        <p class="itemPrice">₹{{ item.price }}</p>
                     </div>
                     <div class="itemName">
                         {{ item.name }}
@@ -69,14 +70,17 @@
                             <span class="addItem"><img src={{url_for('static', filename='src/plus-circle.svg')}} alt="add item"/></span>
                     </div> 
                 <div class="itemType">
-                    <img class="" src={{url_for('static',filename='/src/'~item.type)~'.svg'}} alt="type"/>
+                    <img class="" src={{url_for('static',filename='/src/'~item.type_name)~'.svg'}} alt="type"/>
                 </div>
                 <div class="itemFavourite">
                     <img class="" src="/static/src/favourite.svg" alt="favourite" />
                 </div>
         </div>
     {% endfor %}
-    
+    {% else %}
+        <img id="noitem" src={{url_for('static', filename='src/noitem.jpeg')}} alt="" width="100%"/>
+    {% endif %}
+</div>
 <!--  
     <div class="itemCard">
                 <div class="itemCardPhoto">

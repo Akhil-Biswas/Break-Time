@@ -2,6 +2,17 @@
     box-sizing: border-box; 
 
 }
+#emptyCartDisplay{
+    min-width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: ;
+}
+#emptyCart img{
+    width: 300px;
+}
 #cartlist{
     height: ;
     display: flex;
@@ -11,7 +22,7 @@
     background-color: pink;
 }
 #cartlist .item{
-    height: ;
+    min-height: 70px;
     padding: 5px;
     display: flex;
     gap: 5px;
@@ -53,20 +64,15 @@
     overflow: hidden;
     
 }
-#cartlist .item .quantity{
-    display: flex;
-    flex-direction: column; 
-    justify-content: center;
-    
-}
-#cartlist .item .quantity{
+
+#cartlist .item .quantitycontainer{
     width: 80px;
     display: flex;
     flex-direction: column; 
     justify-content: center;
     
 }
-#cartlist .item .quantity .addTocart {
+#cartlist .item .quantitycontainer .addTocart {
     height: 40px;
     width: ;
     display: flex;
@@ -76,7 +82,7 @@
     overflow: hidden; /* keeps rounded edges clean */
 }
 
-#cartlist .item .quantity .addTocart span {
+#cartlist .item .quantitycontainer .addTocart span {
     flex: 1;                  /* equal width for all spans */
     text-align: center;       /* center text or icons */
     display: flex;            /* flex inside span */
@@ -85,7 +91,7 @@
     color: white;
 }
 
-#cartlist .item .quantity .addTocart span img {
+#cartlist .item .quantitycontainer .addTocart img {
     height: 20px;
 }
 #cartlist .item .total {
@@ -103,7 +109,7 @@
     height: 20px;
 }
 
-#grendTotal {
+#confirmOrder #grendTotal {
     margin: 10px 0;
     display: flex;
     justify-content: space-between;
@@ -111,16 +117,16 @@
     background-color: black;
 }
 
-#grendTotal span {
+#confirmOrder #grendTotal span {
     padding: 0 20px;
 }
 
-#confirmOrder {
+#confirmOrder #orderSubmitBtn {
     margin: 10px 0 50px 0;
     display: flex;
 }
 
-#confirmOrder button{
+#confirmOrder #orderSubmitBtn button{
     height: 30px;
     width: 50%;
     margin: auto;

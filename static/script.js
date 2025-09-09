@@ -1,4 +1,4 @@
-function saveCartData(itemId, quantity) {
+function saveCartData(itemId,itemname,itemPrice,quantity,itemType,itemPic) {
     // Get existing cart or initialize empty
     let cart = JSON.parse(localStorage.getItem("Cart")) || {};
 
@@ -7,7 +7,13 @@ function saveCartData(itemId, quantity) {
         delete cart[itemId];
     } else {
         // Otherwise add/update the item
-        cart[itemId] = quantity;
+        cart[itemId] = {
+            "itemName":itemname,
+            "itemPrice":itemPrice,
+            "quantity":quantity,
+            "itemType":itemType,
+            "itemPic":itemPic
+        };
     }
 
     // Save updated cart back to localStorage
@@ -60,13 +66,17 @@ const carts = document.querySelectorAll(".addTocart");
 carts.forEach(cart => {
     const itemCard = cart.closest(".itemCard"); // find parent card
     const itemId = itemCard.getAttribute("item-id");
-
+    const itemName = itemCard.querySelector(".itemName").textContent.trim();
+    const itemPrice = itemCard.querySelector(".itemPrice").textContent.replace('₹','').trim();
+        //url: static/src/itemType.svg
+    const itemType = itemCard.getAttribute("item_type");
+    const itemPic =itemCard.querySelector(".itemPic").src;
     const removeItem = cart.querySelector(".removeItem");
     const quantity = cart.querySelector(".quantity");
     const addItem = cart.querySelector(".addItem");
 
-    let totalQuantity = JSON.parse(localStorage.getItem("Cart"))
-[itemId] ||0 ;   //first check in localstorage if not then quantity is 0
+    const cartData = JSON.parse(localStorage.getItem("Cart")) || {};
+    let totalQuantity = cartData[itemId] ? cartData[itemId].quantity : 0;   //first check in localstorage if not then quantity is 0
 
 
     function updateQuantity() {
@@ -75,7 +85,7 @@ carts.forEach(cart => {
         console.log(itemId, totalQuantity);
 
         // store in localstorage
-        saveCartData(itemId, totalQuantity);
+        saveCartData(itemId,itemName,itemPrice,totalQuantity,itemType,itemPic);
         // send to server
         //sendCartData(itemId, totalQuantity);
 
