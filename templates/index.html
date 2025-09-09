@@ -55,9 +55,9 @@
           <img src="static/src/filter.svg" alt="filter" />
         </div>
         <div id="items">
-            <div item-id="1" class="itemCard">
+            <div item-id="1" item-type="veg" class="itemCard">
                 <div class="itemCardPhoto">
-                    <img class="" src="{{url_for('static', filename='.images/items/sandwich.png')}}" alt="item" />
+                    <img class="itemPic" src="{{url_for('static', filename='.images/items/sandwich.png')}}" alt="item" />
                 </div>
                 <div class="itemCardDetails">
                     <div class="priceAndfavourit">
@@ -65,7 +65,7 @@
                             <img class="" src="/static/src/favourite.svg" alt="favourite" alt="total favourite" height=""/>
                             <span>0</span>
                         </span>
-                        <p class="">₹ 10.00</p>
+                        <p class="itemPrice">₹ 10.00</p>
                     </div>
                     <div class="itemName">
                         Sandwich 
@@ -85,9 +85,9 @@
                 </div>
             </div>
 
-            <div item-id="2"class="itemCard">
+            <div item-id="2" item-type="veg" class="itemCard">
                 <div class="itemCardPhoto">
-                    <img class="" src="{{url_for('static', filename='.images/items/noodles.jpeg')}}" alt="item" />
+                    <img class="itemPic" src="{{url_for('static', filename='.images/items/noodles.jpeg')}}" alt="item" />
                 </div>
                 <div class="itemCardDetails">
                     <div class="priceAndfavourit">
@@ -95,7 +95,7 @@
                             <img class="" src="/static/src/favourite.svg" alt="favourite" alt="total favourite" height=""/>
                             <span>0</span>
                         </span>
-                        <p class="">₹ 70.00</p>
+                        <p class="itemPrice">₹ 70.00</p>
                     </div>
                     <div class="itemName">
                         Noodles 
@@ -115,9 +115,9 @@
                 </div>
             </div>
             
-            <div item-id="3" class="itemCard">
+            <div item-id="3" item-type="veg" class="itemCard">
                 <div class="itemCardPhoto">
-                    <img class="" src="{{url_for('static', filename='.images/items/Hotdog.jpg')}}" alt="item" /> 
+                    <img class="itemPic" src="{{url_for('static', filename='.images/items/Hotdog.jpg')}}" alt="item" />
                 </div>
                 <div class="itemCardDetails">
                     <div class="priceAndfavourit">
@@ -125,7 +125,7 @@
                             <img class="" src="/static/src/favourite.svg" alt="favourite" alt="total favourite" height=""/>
                             <span>0</span>
                         </span>
-                        <p class="">₹ 50.00</p>
+                        <p class="itemPrice">₹ 50.00</p>
                     </div>
                     <div class="itemName">
                         Hot Dogs 

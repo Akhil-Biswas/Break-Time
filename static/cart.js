@@ -7,7 +7,7 @@ function saveCartData(itemId, quantity) {
         delete cart[itemId];
     } else {
         // Otherwise add/update the item
-        cart[itemId] = quantity;
+        cart[itemId].quantity = quantity;
     }
     // Save updated cart back to localStorage
     localStorage.setItem("Cart", JSON.stringify(cart));
@@ -20,7 +20,7 @@ const carts = document.querySelectorAll(".addTocart");
 
 carts.forEach(cart => {
     const itemCard = cart.closest(".item"); // find parent card
-    const itemId = itemCard.getAttribute("item-id");
+    const itemId = parseInt(itemCard.getAttribute("item-id"));
 
     const removeItem = cart.querySelector(".removeItem");
     const quantity = cart.querySelector(".quantity");
@@ -28,7 +28,7 @@ carts.forEach(cart => {
     const delItem = itemCard.querySelector(".delItem");
 
     let cartData = JSON.parse(localStorage.getItem("Cart")) || {};
-    let totalQuantity = cartData[itemId] || 0;    //first check in localstorage if not then quantity is 0
+    let totalQuantity = cartData[itemId] ? cartData[itemId].quantity : 0;    //first check in localstorage if not then quantity is 0
 
     function updateQuantity() {
         quantity.textContent = totalQuantity;
