@@ -14,6 +14,56 @@ function saveCartData(itemId, quantity) {
     console.info("Cart saved:");
     console.table(cart);
 }
+// HTML component
+function createItemCard(item) {
+    const itemCard = document.createElement("div");
+    itemCard.setAttribute("item-id", item.id);
+    itemCard.classList.add("item");
+
+    itemCard.innerHTML = `
+        <div class="pic">
+            <img class="itemPic" src="${item.image}" alt="item" />
+            <img class="itemType" src="../static/src/${item.type}.svg" alt="${item.type}" />
+        </div>
+        <div class="namePrice">
+            <p class="itemName">${item.name}</p>
+            <p class ="itemPrice">₹${item.price}</p>
+        </div>
+        <div class="quantitycontainer">
+            <div class="addTocart">
+                <span class="removeItem">
+                    <img src="../static/src/minus-circle.svg" alt="remove item" />
+                </span>
+                <span class="quantity">0</span>
+                <span class="addItem">
+                    <img src="../static/src/plus-circle.svg" alt="add item"/>
+                </span>
+            </div>
+        </div>
+        <div class="total">
+            <p>₹0</p>
+        </div>
+        <div class="delItem">
+            <img class="delItem" src="../static/src/delete-icon.svg" alt="Remove Item" />
+        </div>
+    `;
+
+    return itemCard;
+};
+function createConfirmBtn(grandTotalPrice){
+    console.info(grandTotalPrice)
+
+    const confirmOrder = document.querySelector("#confirmOrder");
+    confirmOrder.innerHTML = `
+    <div id="grandTotal">
+        <span>Total</span>
+        <span>₹${grandTotalPrice}</span>
+    </div>
+    <div id="orderSubmitBtn">
+        <button type="submit">Place Order
+        </button>
+    </div>`
+};
 
 // Select all addToCart containers
 const carts = document.querySelectorAll(".addTocart");
@@ -73,3 +123,31 @@ carts.forEach(cart => {
     // Initialize
     updateQuantity();
 });
+
+//++ Dummy Data ++
+const item1 = {
+    id:2,
+    name: "Noodles",
+    image: "http://localhost:5000/static/.images/items/noodles.jpeg",
+    price: 70,
+    type: "veg",
+    quantity: 2
+}
+const item2 = {
+    id:3,
+    name: "Hot Dogs",
+    image: "http://localhost:5000/static/.images/items/noodles.jpeg",
+    price: 50,
+    type: "veg",
+    quantity: 3
+}
+//-- Dummy Data --
+const container = document.getElementById("cartlist");
+// Creating list using list component
+const itemCard1 = createItemCard(item1)
+const itemCard2 = createItemCard(item2)
+// appending in list
+container.appendChild(itemCard1)
+container.appendChild(itemCard2)
+
+createConfirmBtn(100);
