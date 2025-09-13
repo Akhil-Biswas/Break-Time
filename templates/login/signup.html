@@ -11,6 +11,7 @@
     <link rel="manifest" href={{url_for('static',filename='manifest.json')}}>
     
     <link rel="icon" href="../static/src/logo.jpg" type="image/jpg">
+    
     <link rel="stylesheet" href={{url_for('static',filename='login/signup.css')}}>
 </head>
 
@@ -19,55 +20,88 @@
     <div class="">
     <legend>Signup</legend>
     <form id="signup" action="#" method="post">
-    <div class="" id="step0">
-        <label for="">Email</label>
-        <input type="email" name="email" id="Email" value="" placeholder="Email" required />
-    
-        <label for="tel">Mobile Number</label>
-        <input type="tel" name="tel" id="" value="" placeholder="Mobile Number" />
-        <button type="submit">Verify OTP</button>
-        <button type="submit">Next</button>
+    <div id="progressBar">
+        <div id="progressLine"></div>
+        <ul>
+            <li class="current">Number</li>
+            <li>Name</li>
+            <li>College info</li>
+            <li>Password</li>
+        </ul>
     </div>
-    
-    <div class="" id="step1">
-        <label for="fname">First Name :</label>
-        <input type="text" name="fname" id="" value="" placeholder="First Name"required />
+    <div id="stepContainer">
+        <!-- Step 1-->
+        <div class="steps current">
+            <div class="inputbox">
+                <input type="email" name="email" id="Email" value="" placeholder=""/>
+                <label for="">Email</label>
+            </div>
 
-        <label for="MName">Middle Name</label>
-        <input type="text" name="mname" id="MName" value="" placeholder="Middle Name"/>
+            <div class="inputbox">
+                <input type="tel" name="tel" id="" value="" placeholder="" required/>
+                <label for="tel">Mobile Number</label>
+            </div>
+            <div id="otp" class="inputbox">
+                <input type="tel" name="tel" id="" placeholder=""value="" />
+                <label for="tel">OTP</label>
+            </div>
+        </div>
+        <!-- Step 2-->
+        <div class="steps">
+            <div class="inputbox">
+                <input type="text" name="fname" id="" value="" placeholder=""required />
+                <label for="fname">First Name :</label>
+            </div>
 
-        <label for="LName">Last Name</label>
-        <input type="text" name="lname" id="LName" value="" placeholder="Last Name"required />
-        <button type="submit">Next</button>
+            <div class="inputbox">
+                <input type="text" name="mname" id="MName" value="" placeholder=""/>
+                <label for="MName">Middle Name</label>
+            </div>
+            <div id="otp" class="inputbox">
+                <input type="text" name="lname" id="LName" value="" placeholder="" required />
+                <label for="LName">Last Name</label>
+            </div>
+        </div>
+        
+        <div class="steps">
+            <div class="inputoption">
+                <label for="Department">Department</label>
+                <select name="departmentid" id="Department" required>
+                    <option value="1">BCA</option>
+                    <option value="0">BBA</option>
+                </select>
+            </div>
+            <div class="inputoption">
+                <label for="Department">Semister</label>
+                <select name="semid" id="semister" required>
+                    <option value="1">1st</option>
+                    <option value="0">2nd</option>
+                </select>
+            </div>
+            <div class="inputoption">
+                <label for="Department">Section</label>
+                <select name="sectionid" id="Section" required>
+                    <option value="1">A</option>
+                    <option value="2">B</option>
+                </select>
+            </div>
+        </div>
+        <div class="steps">
+            <div class="inputbox">
+                <input type="password" name="pass" id="" value="" placeholder=""required />
+                <label for="password">Password</label>
+            </div>
+            <div class="inputbox">
+                <input type="password" name="pass" id="" value="" placeholder="" required/>
+                <label for="password">Confirm Password</label>
+            </div>
+        </div>
     </div>
-    <div class="" id="step2">
-        <label for="Department">Department</label>
-        <select name="departmentid" id="Department" required>
-        <option value="1">BCA</option>
-            <option value="0">BBA</option>
-        </select>
-        
-        <label for="Department">Semister</label>
-        <select name="semid" id="semister" required>
-        <option value="1">1st</option>
-            <option value="0">2nd</option>
-        </select>
-        
-        <label for="Department">Section</label>
-        <select name="sectionid" id="Section" required>
-            <option value="1">A</option>
-            <option value="2">B</option>
-        </select>
-        <button type="submit">next</button>
-    </div>
-    <div class="" id="step3">
-        <label for="password">Password</label>
-        <input type="password" name="pass" id="" value="" required />
-        <label for="password">Confirm Password</label>
-        <input type="password" name="pass" id="" value="" />
-        
-        <input type="checkbox" name="" id="" />
-        <button type="submit">Submit</button>
+    <!--Controls-->
+    <div id="buttonContainer">
+        <button id="priviousBtn" type="button">Privious</button>
+        <button id="nextBtn"type="button">Next</button>
+        <button id="submitBtn"type="submit">Submit</button>
     </div>
     </form>
     </div>
