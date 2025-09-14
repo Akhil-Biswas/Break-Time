@@ -17,7 +17,7 @@
 
 
 <body>
-    <div class="">
+    <div id="formContainer">
     <legend>Signup</legend>
     <form id="signup" action="#" method="post">
     <div id="progressBar">
@@ -102,6 +102,26 @@
         <button id="priviousBtn" type="button">Privious</button>
         <button id="nextBtn"type="button">Next</button>
         <button id="submitBtn"type="submit">Submit</button>
+    </div>
+    <!--Other -->
+    <div id="othersignup">
+        <p>Register with other</p>
+        <div>
+            <a href="#"> 
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="Github"/>
+    </a>
+        <a href="#">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Google_Favicon_2025.svg/1024px-Google_Favicon_2025.svg.png?20250526093708" alt="Google"/>
+    </a>
+            <a href="#">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png" alt="Facebook"/>
+    </a>
+        </div>
+
+    </div>
+    <div id="login">
+        <p>Already have Account ?</p>
+        <p><a href="{{url_for('login')}}">Login</a></p>
     </div>
     </form>
     </div>

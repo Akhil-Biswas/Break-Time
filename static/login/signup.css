@@ -11,12 +11,25 @@
 }
 body{
     display: flex;
+    margin-top: 50px;
     justify-content: center;
-    align-items: center;
-    background-color: blue;
+    background-color: white;
 }
+body #formContainer{
+    
+}
+body #formContainer legend{
+    margin: 10px;
+    font-size:30px;
+    font-weight: bold;
+    color: green;
+    text-align: center;
+}
+
 form{
     width: 300px;
+    padding: 20px;
+    border-radius: 30px;
     display: flex;
     flex-direction:column ;
     background-color: pink;
@@ -70,8 +83,7 @@ form #progressBar ul li{
     flex-direction: column;
     align-items: center;
     color: gray;
-    
-    
+    font-size: 13px;
 }
 /*pseudo Element for display number in progress bar*/
 form #progressBar ul li::before{
@@ -80,15 +92,15 @@ form #progressBar ul li::before{
     height: 20px;
     width: 20px;
     border-radius:50%;
-    display: block;
-    text-align: center;
+    display: grid;
+    place-items: center;
     z-index: 2;
     background-color: gray;
     color: white;
     /*for */
     transition: box-shadow 0.5s ease, background-color 0.5s ease;
 } 
-form #progressBar ul .done,form #progressBar ul  .current{
+form #progressBar ul li.done,form #progressBar ul  li.current{
     color: black; 
     font-weight: 500px;
 }
@@ -96,12 +108,12 @@ form #progressBar ul .done::before{
     background-color: var(--primary-color);
 }
 
-form #progressBar ul .current::before{
+form #progressBar ul li.current::before{
     /*height: 25px;
     width: 25px;
     border:2px solid var(--primary-color);*/
     background-color: var(--primary-color);
-    box-shadow: 0 0 0 5px var(--primary-color); /*Increase Size*/
+    box-shadow: 0 0 0 3px var(--primary-color); /*Increase Size*/
 }
 form #stepContainer{
     display: flex;
@@ -147,7 +159,7 @@ form #stepContainer .steps .inputbox input{
     border-radius: 30px;
     padding: 5px;
     color: black;
-    background-color: transparent;
+    background-color: pink;
 }
 form #stepContainer .steps .inputbox input:focus {
     border-color: green;
@@ -163,7 +175,7 @@ form #stepContainer .steps .inputbox input:not(:placeholder-shown) + label,form 
 
 form #stepContainer .steps .inputoption{
     margin: 20px 0;
-    background-color: red;
+    background-color: ;
     display: flex;
     flex: 1;
     
@@ -203,4 +215,34 @@ form #buttonContainer #priviousBtn{
 form #buttonContainer button[type="submit"]{
     display: none;/*Defult none changed by js in last step to bolck*/
     background-color: black;
+}
+
+
+
+/*Extra*/
+#othersignup{
+    margin: 50px 0 50px 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: ;
+}
+
+#othersignup img {
+    height: 30px;
+}
+#othersignup div{
+    width: 120px;
+    margin: 0 0 20px 0;
+    display: flex;
+    justify-content: space-between;
+    background-color: ;
+}
+
+body #formContainer #login{
+    margin: 30px;
+}
+body #formContainer #login p,a{
+    text-align: center;
+    color: green;
 }

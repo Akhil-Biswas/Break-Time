@@ -12,7 +12,7 @@ const submitBtn = document.querySelector("#submitBtn");
 document.documentElement.style.setProperty('--steps',totalNumberOfSteps)
 
 
-currentStep = 0
+let currentStep = 0
 
 function updateButton(currentStep){
     if(currentStep === 0){
@@ -60,6 +60,14 @@ function updateStep(stepContainer, currentStep) {
         }
     });
 }
+function validateCurrentStep(stepContainer,currentStep){
+    const fieldsInAStep = stepContainer[currentStep].querySelectorAll("input,select");
+    for (let field of fieldsInAStep){
+        if(!field.reportValidity()){
+            return false
+        }
+    }return true  //check all field then return true
+}
 
 /* Privious    */
 priviousBtn.addEventListener('click', () =>{
@@ -78,20 +86,24 @@ priviousBtn.addEventListener('click', () =>{
 /* Next    */
 nextBtn.addEventListener('click', () =>{
     console.info("nextBtn Clicked")
-    
-    if (currentStep < (stepsList.length -1)){
-        currentStep++;
-        /* update step*/
-    }
     console.info(currentStep)
-    updateProgress(stepsList,currentStep);
-    updateStep(stepContainer, currentStep);
-    updateButton(currentStep);
+    if (validateCurrentStep(stepContainer,currentStep)){
+        //update step
+        if (currentStep < (stepsList.length -1)){
+            currentStep++;
+        /* update step*/
+        }
+    
+        updateProgress(stepsList,currentStep);
+        updateStep(stepContainer, currentStep);
+        updateButton(currentStep);
+    }
+    
 }
 )
 /* Submit    */
 submitBtn.addEventListener('click', (e) =>{
-    e.preventDefault();
+   
     console.info("submitBtn Clicked")
 }
 )
