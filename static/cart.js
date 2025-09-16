@@ -43,6 +43,40 @@ function sendCartData(itemId, quantity) {
 }
 
 */
+
+function orderPlace(){
+    const cart = JSON.parse(localStorage.getItem("Cart") || "{}");
+    //checking item present or not
+    if (Object.keys(cart).length){
+        //send data to server
+        fetch("/orderPlaced", {
+            method: "POST",
+            headers: {
+            "Content-Type": "application/json"
+            },
+            body: localStorage.getItem("Cart")
+        })
+        .then(response => response.json())//convert into  json
+        .then(data => {
+            console.log(data)
+            if (data.status ==="success"){
+                console.info(data.message);
+                alert("Order Placed")
+            }else if (data.status ==="error"){
+                console.info(data.message);
+                alert("Error..")
+            }
+        })
+        .then(
+            // cleare localStorage
+            )
+    }else{
+        console.warn("cart is empty")
+        window.location.reload()
+        alert("cart is empty")
+    }
+}
+
 function createItemCard(item) {
     const itemCard = document.createElement("div");
     itemCard.setAttribute("item-id", item.id);
@@ -92,6 +126,11 @@ function createConfirmBtn(grandTotalPrice){
         <button type="submit">Place Order
         </button>
     </div>`
+    
+    // order to server 
+    const orderbtn = document.querySelector("#orderSubmitBtn button")
+
+orderbtn.addEventListener("click",orderPlace)
 }
 // Select all addToCart containers
 let sevedItem = JSON.parse(localStorage.getItem("Cart"));
@@ -139,7 +178,6 @@ function cartlogic(itemCard,sevedItem){
 
         if (totalQuantity === 0) {
             itemCard.remove()
-            document.querySelector("#confirmOrder").style.display ="none"
         } else {
             removeItem.style.display = "inline-block";
             quantity.style.display = "inline-block";
@@ -195,7 +233,7 @@ window.addEventListener("load", () => {
                 price: item.itemPrice,
                 type: item.itemType,
                 quantity: item.quantity,
-                image: item.itemPic // replace with actual or placeholder image
+                image: item.itemPic
             });
             
             container.appendChild(itemCard);
@@ -205,6 +243,19 @@ window.addEventListener("load", () => {
         });
         createConfirmBtn(grandTotalPrice);
     } else {
+        document.querySelector("#confirmOrder").style.display ="none"
         document.querySelector("#emptyCartDisplay").style.display = 'flex'
     }
 });
+
+
+/*
+ // change ui if cart is empty then show emply ui
+    if (Object.keys(savedCart).length === 0) {
+        document.querySelector("#confirmOrder").style.display ="none"
+        document.querySelector("#emptyCartDisplay").style.display = 'flex'
+    } else {
+        document.querySelector("#confirmOrder").style.display ="flex"
+        document.querySelector("#emptyCartDisplay").style.display = 'none'
+    } 
+*/
