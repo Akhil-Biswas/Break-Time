@@ -35,7 +35,22 @@ def cart():
     
     return render_template("cart.html")
     
-
+@app.route("/orderPlaced", methods =["POST"])
+def orderAccept():
+    if 'user' in session:
+        if request.method == "POST":
+            data = request.get_json()
+            print(type(data))
+            if not data:
+                response ={"status": "error",
+                 "message": "Cart is empty"}
+                return jsonify(response),400
+            else:
+                response ={"status": "success",
+                 "message": "Order received"}
+                return jsonify(response),200
+    else:
+        return redirect(url_for("login"))
 @app.route("/update_cart", methods=["POST"])
 def addToCart():
     data = request.get_json()
