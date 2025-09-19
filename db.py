@@ -1,6 +1,6 @@
 import mysql.connector
 from config import Mysql
-
+from datetime import datetime
 def connectToMysqlServer():
     '''Connect to MySQL using mysql config '''
     try:
@@ -29,47 +29,36 @@ class User:
         self.tel = tel
         self.email = email
         self.password = password
-
+        self.enrolled_date = datetime.now()
+        
     def saveindatabase(self):
         '''Save '''
         try:       
             conn= connectToMysqlServer()
             cursor = conn.cursor()
-    
-            # SQL for creating database & table            
-            #cursor.execute("Drop DATABASE  railway;")
-                
-            cursor.execute("CREATE DATABASE IF NOT EXISTS railway;")
-            print("Database created successfully!")
-            cursor.execute("USE railway;")
-            query = '''
-                CREATE TABLE IF NOT EXISTS user (
-                userid INT AUTO_INCREMENT PRIMARY KEY,
-                fname VARCHAR(50),
-                mname VARCHAR(50),
-                lname VARCHAR(50),
-                departmentid INT,
-                sectionid INT,
-                tel VARCHAR(15),
-                email VARCHAR(50),
-                password VARCHAR(50)
-                );
-                '''
-            cursor.execute(query)
-            conn.commit()     
-            print("Table created successfully!")
-            # SQL for add insert data
-            insert_query = """
-                INSERT INTO user (fname, mname, lname, departmentid, sectionid, tel, email, password)
+
+            # insert in users 
+            query = """
+                INSERT INTO users (f_name,m_name, l_name, mobile_number,email_id,pass, enrolled_date ,last_modify_date) 
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
                 """
-            values = (self.fname, self.mname, self.lname,self.departmentid, self.sectionid, self.tel, self.email,self.password)
-            cursor.execute(insert_query,values)
-             
+            values = (self.fname, self.mname, self.lname, self.tel, self.email,self.password,self.enrolled_date,self.enrolled_date)
+            
+            cursor.execute(query,values)
+             # insert in student table
+            userId = cursor.lastrowid
+            query = """
+                INSERT INTO student (students_id, department, section)
+                VALUES (%s, %s,%s)
+                """
+            values = (userId,self.departmentid, self.sectionid)
+            cursor.execute(query,values)
+            print("user created.. as student")
+        except Exception as e :
+            print(e)
+        finally :
             conn.commit()
             cursor.close()
-        except :
-            print("Server connection Failed")
 class Login:
         def __init__(self,tel,password):
             self.tel = tel
@@ -100,7 +89,7 @@ class Login:
 if __name__ == "__main__":
     # Example usage
     user1 = User(
-    #userid=0,
+    userid=None, 
     fname="Krishna",
     mname="A",
     lname="B",
@@ -110,10 +99,10 @@ if __name__ == "__main__":
     email="krishna@example.com",
     password = 'ytfitcitc'
     )
-  #  user1.saveindatabase()
+    user1.saveindatabase()
     
     user2 = User(
-    #userid=1,
+    userid=None,
     fname="Radhe",
     mname="A",
     lname="B",
@@ -129,4 +118,5 @@ if __name__ == "__main__":
     tel="8016327566",
     password = "akhil"
     )
-    user.authenticate()
+    #user.authenticate()
+    #connectToMysqlServer()
