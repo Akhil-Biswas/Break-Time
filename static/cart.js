@@ -48,13 +48,18 @@ function orderPlace(){
     const cart = JSON.parse(localStorage.getItem("Cart") || "{}");
     //checking item present or not
     if (Object.keys(cart).length){
+        //Send minimum data
+        orderData ={};
+        for(let itemId in cart){
+            orderData[itemId] = cart[itemId].quantity;
+        }
         //send data to server
         fetch("/orderPlaced", {
             method: "POST",
             headers: {
             "Content-Type": "application/json"
             },
-            body: localStorage.getItem("Cart")
+            body: JSON.stringify(orderData)
         })
         .then(response => response.json())//convert into  json
         .then(data => {
@@ -62,9 +67,12 @@ function orderPlace(){
             if (data.status ==="success"){
                 console.info(data.message);
                 alert("Order Placed")
-            }else if (data.status ==="error"){
-                console.info(data.message);
-                alert("Error..")
+                //Clear itemlist
+                
+            }else{
+                window.location.href =data.href
+                console.warn(data.message);
+                alert(data.message)
             }
         })
         .then(

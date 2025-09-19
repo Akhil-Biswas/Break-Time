@@ -8,6 +8,7 @@ from items import Items
 from saveimage import saveimage
 from datetime import timedelta
 from config import Folders
+from order import Order
 app = Flask(__name__)
 
 app.secret_key ="namaste"
@@ -37,20 +38,29 @@ def cart():
     
 @app.route("/orderPlaced", methods =["POST"])
 def orderAccept():
-    if 'user' in session:
+    if 'user' not in session:
+        response ={"status": "error",
+            "message": "You are not logedin"
+            ,"href":url_for('login')}
+        return jsonify(response),400
+    else:
         if request.method == "POST":
             data = request.get_json()
-            print(type(data))
+            print(data)
             if not data:
                 response ={"status": "error",
                  "message": "Cart is empty"}
                 return jsonify(response),400
-            else:
+            else:       
+                order = Order(
+       # orderId  #set by database 
+       userId = session['user']['userid'], #from session
+       items = data,
+       orderStatusId = 1 #one for place order
+    ).placeOrder()
                 response ={"status": "success",
                  "message": "Order received"}
                 return jsonify(response),200
-    else:
-        return redirect(url_for("login"))
 @app.route("/update_cart", methods=["POST"])
 def addToCart():
     data = request.get_json()
@@ -71,6 +81,19 @@ def crpage():
 @app.route("/restaurant/")
 def restaurantpage():
     return render_template("restaurant/index.html")
+    
+@app.route("/restaurant/login")
+def restaurantlogin():
+    return """
+        <script>
+            alert("Coming Soon!");
+            window.location.href = "/restaurant/";  // redirect after alert
+        </script>
+    """
+    
+@app.route("/restaurant/menu")
+def menu():
+    return render_template("restaurant/menu.html")
     
 @app.route("/restaurant/additems",methods =["GET", "POST"])
 def additem():

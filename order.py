@@ -19,14 +19,18 @@ def connectToMysqlServer():
         print("***************************************************************")
         
 class Order:
-    def __init__(self, time, userId, itemId, quantity, orderStatus, paymentStatus, orderId=None):
+    def __init__(self, userId, items: dict, orderStatusId, orderId=None):
+        """
+        items = {
+                    item_id: quantity,
+                    item_id: quantity, ...
+                }
+        """
         self.orderId = orderId  #set by database 
-        self.time = time
-        self.userId = userId
-        self.itemId = itemId
-        self.quantity = quantity
-        self.orderStatus = orderStatus
-        self.paymentStatus = paymentStatus
+        self.time = datetime.now()
+        self.userId = userId #from session
+        self.items = items
+        self.orderStatusId = orderStatusId
     
     
     def placeOrder(self):
@@ -36,26 +40,27 @@ class Order:
             # select database 
             cursor.execute(f"USE {Mysql.MYSQL_DATABASE}")
             print(f"using database {Mysql.MYSQL_DATABASE}" )
-            #Creating Order table 
-            query = '''
-            CREATE TABLE IF NOT EXISTS orders(
-            order_id INT PRIMARY KEY AUTO_INCREMENT,
-            order_time DATETIME,
-            user_id INT,
-            item_id INT,
-            item_quantity INT,
-            order_status VARCHAR(50),
-            payment_status VARCHAR(50)
-            );
-            '''
-            cursor.execute(query)
-            # insert data
+            
+            # 1️⃣  insert data in orders
             query ='''
-            INSERT INTO orders(order_time,user_id,item_id,item_quantity) values(%s,%s,%s,%s)
+            INSERT INTO orders (`time`, `user_id`, `status_id`, `payment_id`) values(%s,%s,%s,%s)
             '''
-            values =(self.time,self.userId,self.itemId,self.quantity)
+            values =(self.time,self.userId,self.orderStatusId,None)
             cursor.execute(query,values)
+            
+            
+            #  2️⃣  insert data in orders_item
+            orderId = cursor.lastrowid
+            items = self.items.items() # items() is a dict function to get key value pair
+            for itemId, quantity in items:
+                print(f"itemId: {itemId}, quantity: {quantity}")
+                query ='''
+                INSERT INTO `orders_items` (order_id, item_id, quantity, status_id) VALUES (%s,%s,%s,%s)
+                '''
+                values =(orderId, int(itemId),int(quantity),1)
+                cursor.execute(query,values)
             conn.commit()
+            
             print("Order placed..")
             conn.close()
             return #msg to user
@@ -72,10 +77,7 @@ if __name__ == "__main__":
     
     Order(
        # orderId  #set by database 
-       time =datetime.now(),
-       userId = 12,
-       itemId =24,
-       quantity = 2,
-       orderStatus = "ok",
-       paymentStatus = "paid",
+       userId = 1, #from session
+       items = {'1': 4, '2': 2},
+       orderStatusId = 1 #one for place order
     ).placeOrder()
