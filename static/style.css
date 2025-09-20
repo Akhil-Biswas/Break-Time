@@ -5,17 +5,19 @@
     padding: 0;
     margin: 0;
     color: white;
+    box-sizing: border-box;
 }
 
 #TopNavigationBar{
     height: 50px;
-    margin: 0 0 30px 0;
+    width: 100%;
+    top: 0;
     padding: 0 10px 0 10px;
-    background-color: green;
+    background-color: #004d00;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    
+    position: fixed;
 }
 #TopNavigationBar #logo {
     display: flex;
@@ -46,6 +48,7 @@
 
 /*categories START*/
 #categories {
+    margin-top: 50px;
     height:;
     background-color: ;
 }
@@ -102,7 +105,7 @@
 /*  START */
 #items {
     height:;
-    background-color: blue;
+    background-color: ;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
@@ -145,7 +148,7 @@
 
 .Detail {
     width: 200px;
-    height: 200px;
+    height:;
     top: 10px;
     right: 10px;
     position: absolute;
@@ -157,13 +160,13 @@
 .Detail #detailClose{
     position: absolute;
     height: 28px;
-    top: 10px;
-    right: 10px;
+    top: 15px;
+    right: 15px;
 }
 
 .Detail ul {
     list-style: none;
-    margin: 0;
+    margin: 40px 0 0 0;
     padding: 0;
 }
 

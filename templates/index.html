@@ -1,4 +1,15 @@
 {% extends 'base.html' %}
+{% block style %}
+<link rel="stylesheet" href={{url_for('static',filename='items.css')}}>
+{% endblock %}
+
+{% block title %}Break Time :Order food{% endblock %}
+
+{% block Recomendation %}
+    <section id="recomendation">
+        <p>Recomendation</p>
+    </section>
+{% endblock %}
 
 {% block categories %}
 <section id="categories">
@@ -42,8 +53,12 @@
 </section>
 {% endblock %}
 
-{% block items %}
-<div id="items">
+{% block Container %}
+<section>
+    <div id="filter">
+        <img src={{url_for('static', filename='/src/filter.svg')}} alt="filter" />
+    </div>
+    <div id="items">
     {% if items %}
     {% for item in items %}
         <div item-id="{{item.item_id}}" item_type ={{item.type_name}} class="itemCard">
@@ -81,6 +96,7 @@
         <img id="noitem" src={{url_for('static', filename='src/noitem.jpeg')}} alt="" width="100%"/>
     {% endif %}
 </div>
+</section>
 <!--  
     <div class="itemCard">
                 <div class="itemCardPhoto">
@@ -177,4 +193,8 @@
             
 </div>
 -->
+{% endblock %}
+
+{% block script %}
+    <script src="{{url_for('static', filename='script.js')}}"></script>
 {% endblock %}
