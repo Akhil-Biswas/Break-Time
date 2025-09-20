@@ -1,20 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Break Time :Order food</title>
-    
-    <!-- Application Name -->
-    <meta name="apple-mobile-web-app-title" content="It's Break Time">
-    <meta name="application-name" content="Break Time">
-    <link rel="manifest" href={{url_for('static',filename='manifest.json')}}>
-    
-    <link rel="icon" href={{url_for('static', filename='/src/logo.jpg')}} type="image/jpg">
-    
-    <link rel="stylesheet" href={{url_for('static',filename='profile.css')}}>
-</head>
-<body> 
+{% extends 'base.html' %}
+
+{% block style %}
+<link rel="stylesheet" href={{url_for('static',filename='profile.css')}}>
+{% endblock %}
+
+{% block title %}Break Time:{% endblock %}
+
+{% block Container %}
     <div id="basicinfo">
         <!-- Basic Info-->
         <img id="avatar" src="{{url_for('static',filename='.images/profile_pic/'~user.userid~'.jpg')}}" alt="Profile Pic" />
@@ -53,16 +45,9 @@
             </a>
         </div>
     </div>
-    <nav id="BottomNavigationBar">
-            <!--search bar, order , menu-->
-            <ul>
-                <li><a href="{{url_for('home')}}"><img class="BottomNavigationBarIcon" alt="Menu"src="../static/src/restaurant-menu.svg"></a></li>
-                <li><a href="{{url_for('favourite')}}"><img class="BottomNavigationBarIcon" alt="Favourite"src="../static/src/favourite.svg"></a></li>
-                <li><a href="{{url_for('search')}}"><img class="BottomNavigationBarIcon" alt="Search"src="../static/src/search.svg"></a></li>
-                <li><a href="{{url_for('cart')}}"><img class="BottomNavigationBarIcon" alt="Cart"src="../static/src/cart.svg"></a></li>
-                <li><a href="{{url_for('profile')}}"><img class="BottomNavigationBarIcon" alt="Profile"src={{url_for('static', filename='src/profile.svg')}}></a></li>
-            </ul>
-    </nav>
-<script src={{url_for('static',filename='login/signup.js')}} type="text/javascript" charset="utf-8"></script>
-</body>
-</html>
+    
+{% endblock %}
+
+{% block script %}
+    <script src={{url_for('static',filename='login/signup.js')}} type="text/javascript" charset="utf-8"></script>
+{% endblock %}

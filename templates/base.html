@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Break Time :Order food</title>
+    <title>{% block title %}
+        Break Time :Order food
+    {% endblock %}</title>
     
     <!-- Application Name -->
     <meta name="apple-mobile-web-app-title" content="It's Break Time">
@@ -11,8 +13,11 @@
     <link rel="manifest" href={{url_for('static',filename='manifest.json')}}>
     
     <link rel="icon" href="../static/src/logo.jpg" type="image/jpg">
+    
     <link rel="stylesheet" href={{url_for('static',filename='style.css')}}>
-    <link rel="stylesheet" href={{url_for('static',filename='items.css')}}>
+    {% block style %}
+    
+    {% endblock %}
 </head>
 
 
@@ -28,24 +33,14 @@
             <img id="detailOpen"class="icon" alt="Detail"src={{url_for('static' , filename='/src/menu-symbol-of-three-parallel-lines-svgrepo-com.svg')}}>
         </div>
     </nav>
-    
-    
-    <section id="recomendation">
-        <p>Recomendation</p>
-        
-    </section>
+   
     {% block categories %}
-    
     {% endblock %}
     
-    <section>
-        <div id="filter">
-          <img src={{url_for('static', filename='/src/filter.svg')}} alt="filter" />
-        </div>
-        {% block items %}
+    
+{% block Container %}
         
-        {% endblock %}
-    </section>
+{% endblock %}
 
     <nav id="BottomNavigationBar">
             <!--search bar, order , menu-->
@@ -70,9 +65,14 @@
             <li>
                 <a href="{{url_for('me')}}">Contect Me</a>
             </li>
+            <li>
+                <a href="{{url_for('restaurantlogin')}}">Restaurant Login</a>
+            </li>
         </ul>
     </div>
 <script src="{{url_for('static', filename='script.js')}}"></script>
+{% block script %}
+{% endblock %}
 </body>
 
 </html>

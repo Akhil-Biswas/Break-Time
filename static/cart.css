@@ -1,11 +1,11 @@
 * {
-    box-sizing: border-box; 
-
+    box-sizing: border-box;
+    color: black;
 }
 #emptyCartDisplay{
     min-width: 100vw;
     min-height: 100vh;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     background-color: ;
@@ -19,7 +19,7 @@
     flex-direction: column;
     gap: 10px;
     margin: 50px 0 0 0;
-    background-color: pink;
+    background-color: rgb(0,0,0,0.1);
 }
 #cartlist .item{
     min-height: 70px;
@@ -27,7 +27,8 @@
     display: flex;
     gap: 5px;
     justify-content: space-between;
-    background-color: gray;
+    background-color: rgb(240,255,244);
+    box-shadow: 1px 0 10px rgba(0, 255, 0, 0.5);
 }
 
 #cartlist .item .pic{
@@ -83,12 +84,12 @@
 }
 
 #cartlist .item .quantitycontainer .addTocart span {
-    flex: 1;                  /* equal width for all spans */
-    text-align: center;       /* center text or icons */
-    display: flex;            /* flex inside span */
-    justify-content: center;  /* horizontal center */
-    align-items: center;      /* vertical center */
-    color: white;
+    flex: 1;/* equal width for all spans */
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:;
 }
 
 #cartlist .item .quantitycontainer .addTocart img {
@@ -119,6 +120,7 @@
 
 #confirmOrder #grendTotal span {
     padding: 0 20px;
+    color: white;
 }
 
 #confirmOrder #orderSubmitBtn {
@@ -134,37 +136,3 @@
     border-radius: 30px;
     background-color: green;
 }
-
-
-/*Same as base html & css */
-#BottomNavigationBar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 50px;
-    background-color: green;
-    z-index: 1000;
-    align-content: center;
-}
-#BottomNavigationBar ul {
-    display: flex;
-    justify-content: space-around; /* equal spacing */
-    align-items: center;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-#BottomNavigationBar ul li {
-    flex: 1;/* all take equal width */
-    text-align: center;
-}
-
-#BottomNavigationBar ul li a .BottomNavigationBarIcon {
-    width: 28px;           /* icon size */
-    cursor: pointer;
-    fill: white;
-}
-
-
