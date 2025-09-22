@@ -1,20 +1,25 @@
 *{
-    
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+    --bg-color:#4CAF50;
+}
+html, body {
+    height: 100%;
+    margin: 0;
 }
 
-html, body{
-    height: 100%;
-    width: 100%;
+body #formContainer{
+    min-height: 95vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #F5F7FA;
+    background-color: var(--bg-color);
 }
 form{
-    height: 500px;
     width: 300px;
-    padding: 10px;
-    background-color: #4A90E2;
 }
 form div p {
     text-align: center;
@@ -23,9 +28,12 @@ form div p {
 form #loginblock {
     display: flex;
     flex-direction: column;
-    align-items center;
 }
+
 form #loginblock legend{
+    margin: 10px;
+    font-size:30px;
+    font-weight: bold;
     text-align: center;
 }
 form #loginblock .inputfield{
@@ -46,23 +54,62 @@ form #loginblock .inputfield .errordisplay{
 }
 form #loginblock input{
     width: 100%;
-    border: none;
+    border: 2px solid white;
+    border-color: white;
     outline: none;
-    border-bottom:1px solid black;
-    padding: 0 5px;
-    background-color: ;
+    border-radius: 30px;
+    padding: 5px;
+    color: black;
+}
+form #loginblock .inputfield input{
+    width: 100%;
+    border: 2px solid white;
+    border-color: white;
+    outline: none;
+    border-radius: 30px;
+    padding: 5px;
+    color: white;
+    background-color: transparent;
+}
+
+form #loginblock .inputfield label{
+    position: absolute;
+    pointer-events: none;
+    color: rgba(0,0,0,0.6);
+    background: ;
+    margin:0 10px ;
+    top: 5px;
+    left:40px;
+    transition: 0.3s ease;
+}
+/* add * after lable where sibling input has attribute [required]*/
+form #loginblock .inputfield input[required] + label::after {
+    content: '*';
+    color: red;
+    margin-left: 4px;
+}
+
+form #loginblock .inputfield input:focus {
+    border-color: green;
+}
+
+
+form #loginblock .inputfield  input:not(:placeholder-shown) + label,form #loginblock .inputfield input:focus + label {
+    background-color: var(--bg-color);
+    color: white;
+    font-size: 12px;
+    transform: translateY(-15px);
 }
 
 #telephonefield{
     
 }
 
-}
 #passwordfield{
     
 }
 form #loginblock p{
-    text-align: right;
+    text-align: right; 
 }
 form #loginblock button{
     height: 40px;

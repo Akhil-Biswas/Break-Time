@@ -155,17 +155,18 @@ def signup():
         user.saveindatabase()
         # Create session
         session.permanent = True
-        session['user'] = {
-            "userid":user.userid,
-            "fname": user.fname,
-            "mname": user.mname,
-            "lname": user.lname,
-            "departmentid": user.departmentid,
-            "sectionid": user.sectionid,
-            "tel": user.tel,
-            "email": user.email
-        }
-        return redirect(url_for("login"))
+        if user:
+            session['user'] = {
+                "userid":user.userid,
+                "fname": user.fname,
+                "mname": user.mname,
+                "lname": user.lname,
+                "departmentid": user.departmentid,
+                "sectionid": user.sectionid,
+                "tel": user.tel,
+                "email": user.email
+            }
+            return redirect(url_for("login"))
       
     return render_template("login/signup.html")
     

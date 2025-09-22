@@ -8,17 +8,18 @@
 }
 
 #items .itemCard {
-    height: 250;
+    min-height: 250px;
     width: 150px;
     overflow: none;
     position: relative;
-    background-color: white;
+    background-color: #f0fff4;
+    box-shadow: 0 4px 10px rgba(0,128,0,0.1); 
 }
 
 #items .itemCard .itemCardPhoto{
-    height: 60%;
-    width: 100%;
-    padding:0 20x;
+    height: 150px;
+    width: 150px;
+    padding: 10px;
     display: flex;
     flex: 1;
     overflow: hidden;
@@ -28,8 +29,9 @@
 #items .itemCard .itemCardPhoto img{
     height: 100%;
     width: 100%;
-    object-fit: contain;
-    
+    object-fit: cover;
+    object-position: center;
+    border-radius: 5px;
 }
 
 #items .itemCard .itemCardDetails{
@@ -51,9 +53,8 @@
 }
 
 #items .itemCard .itemCardDetails .priceAndfavourit span{
-    display: flex;
     align-items: center;
-    visibility: ;
+    visibility: hidden;
 }
 
 #items .itemCard .itemCardDetails .priceAndfavourit span img{
@@ -111,14 +112,16 @@
 }
 
 .addTocart span {
-    flex: 1;                  /* equal width for all spans */
-    text-align: center;       /* center text or icons */
-    display: flex;            /* flex inside span */
-    justify-content: center;  /* horizontal center */
-    align-items: center;      /* vertical center */
+    flex: 1;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: white;
 }
-
+.addTocart .removeIten,.quentity{
+    display: none;
+}
 .addTocart span img {
     height: 20px;
 }

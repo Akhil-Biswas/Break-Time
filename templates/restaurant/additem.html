@@ -26,7 +26,7 @@
                 <div id="lodar">
                 </div>
             </label>
-            <input id="uploadfile" type="file" accept="image/jpg, image/jpeg" name="itemImage" value="" />
+            <input id="uploadfile" type="file" accept="image/jpeg" name="itemImage" value="" />
             <p id="imageSize"></p>
         </div>
         <div id="mainform">
@@ -63,11 +63,10 @@
 <nav id="BottomNavigationBar">
             <!--search bar, order , menu-->
             <ul>
-                <li><a href="{{url_for('home')}}"><img class="BottomNavigationBarIcon" alt="Menu"src="../static/src/restaurant-menu.svg"></a></li>
-                <li><a href="{{url_for('favourite')}}"><img class="BottomNavigationBarIcon" alt="Favourite"src="../static/src/favourite.svg"></a></li>
-                <li><a href="{{url_for('search')}}"><img class="BottomNavigationBarIcon" alt="Search"src="../static/src/search.svg"></a></li>
-                <li><a href="{{url_for('cart')}}"><img class="BottomNavigationBarIcon" alt="Cart"src="../static/src/cart.svg"></a></li>
-                <li><a href="{{url_for('profile')}}"><img class="BottomNavigationBarIcon" alt="Profile"src={{url_for('static', filename='src/profile.svg')}}></a></li>
+                <li><a href="{{url_for('restaurantpage')}}"><img class="BottomNavigationBarIcon" alt="Order"src={{url_for('static',filename='src/open-cardboard-box.svg')}}></a></li>
+                <li><a href="{{url_for('menu')}}"><img class="BottomNavigationBarIcon" alt="Item List"src="../static/src/restaurant-menu.svg"></a></li>
+                <!-- <li><a href="{{url_for('search')}}"><img class="BottomNavigationBarIcon" alt="Search"src="../static/src/search.svg"></a></li> -->
+                <li><a href="{{url_for('restaurantlogin')}}"><img class="BottomNavigationBarIcon" alt="Profile"src={{url_for('static', filename='src/restaurant.svg')}}></a></li>
             </ul>
     </nav>
 <script src="{{url_for('static',filename='restaurant/additem.js')}}" type="text/javascript" charset="utf-8"></script>

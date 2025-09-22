@@ -38,26 +38,6 @@ class Items:
             conn= connectToMysqlServer()
             cursor = conn.cursor()
              
-            cursor.execute(f"CREATE DATABASE IF NOT EXISTS {Mysql.MYSQL_DATABASE};")
-            print(f"Database {Mysql.MYSQL_DATABASE} created successfully!")
-            cursor.execute(f"USE {Mysql.MYSQL_DATABASE};")
-            query = '''
-                CREATE TABLE IF NOT
-                EXISTS items (
-                item_id INT AUTO_INCREMENT PRIMARY KEY,
-                name VARCHAR(100),
-                price INT,
-                veg_flag INT,
-                category INT,
-                restaurant INT,
-                FOREIGN KEY (category) REFERENCES categories(category_id),
-                FOREIGN KEY (veg_flag) REFERENCES food_type(type_id),
-                FOREIGN KEY (restaurant) REFERENCES restaurants(restaurant_id)
-                );
-                '''
-            cursor.execute(query)
-            conn.commit() 
-            print("Table Created..") 
             query ='''
             INSERT INTO items(item_id,name,price,category,veg_flag,restaurant) VALUES (%s, %s, %s, %s,%s, %s) 
             '''

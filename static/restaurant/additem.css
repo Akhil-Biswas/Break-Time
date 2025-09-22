@@ -20,6 +20,7 @@
     display: flex;
     flex-direction: column;
 }#imageContainer #errorDisplay,#imageName,#imageSize{
+    display: none;
     visibility: hidden;
 }
 #additem  div label{
@@ -113,5 +114,3 @@
     cursor: pointer;
     fill: white;
 }
-
-

@@ -36,7 +36,7 @@ class User:
         try:       
             conn= connectToMysqlServer()
             cursor = conn.cursor()
-
+            print(f"using database {Mysql.MYSQL_DATABASE}" )
             # insert in users 
             query = """
                 INSERT INTO users (f_name,m_name, l_name, mobile_number,email_id,pass, enrolled_date ,last_modify_date) 
@@ -53,7 +53,7 @@ class User:
                 """
             values = (userId,self.departmentid, self.sectionid)
             cursor.execute(query,values)
-            print("user created.. as student")
+            print("user register.. as student")
         except Exception as e :
             print(e)
         finally :
@@ -67,7 +67,7 @@ class Login:
             try:
                 conn= connectToMysqlServer()
                 cursor = conn.cursor()
-                cursor.execute("USE railway;")
+                print(f"using database {Mysql.MYSQL_DATABASE}" )
                 query = ''' SELECT userid, fname, mname ,lname, departmentid,sectionid,tel,email FROM user WHERE  tel = %s AND password = %s'''
                 values = (self.tel, self.password)
                 cursor.execute(query,values)
@@ -99,7 +99,7 @@ if __name__ == "__main__":
     email="krishna@example.com",
     password = 'ytfitcitc'
     )
-    user1.saveindatabase()
+    #user1.saveindatabase()
     
     user2 = User(
     userid=None,
@@ -115,8 +115,8 @@ if __name__ == "__main__":
     #user2.saveindatabase()
     
     user = Login(
-    tel="8016327566",
+    tel="8016627566",
     password = "akhil"
     )
-    #user.authenticate()
+    user.authenticate()
     #connectToMysqlServer()

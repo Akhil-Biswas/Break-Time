@@ -10,25 +10,30 @@
     /*--progress-bar-width:calc((3/4)*100%);*/
 }
 body{
+    
+}
+body #formCoverImg{
+    
+}
+body #formContainer{
     display: flex;
+    flex-direction: column;
     margin-top: 50px;
     justify-content: center;
     background-color: white;
-}
-body #formContainer{
-    
 }
 body #formContainer legend{
     margin: 10px;
     font-size:30px;
     font-weight: bold;
-    color: green;
+    color: var(--primary-color);
     text-align: center;
 }
 
 form{
-    width: 300px;
+    width: 100%;
     padding: 20px;
+    margin: auto;
     border-radius: 30px;
     display: flex;
     flex-direction:column ;
@@ -162,13 +167,15 @@ form #stepContainer .steps .inputbox input{
     background-color: pink;
 }
 form #stepContainer .steps .inputbox input:focus {
-    border-color: green;
+    border-color: var(--primary-color);
 }
-
+form #stepContainer .steps .inputbox input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px pink inset ;
+}
 
 form #stepContainer .steps .inputbox input:not(:placeholder-shown) + label,form #stepContainer .steps .inputbox input:focus + label {
     background: pink;
-    color: green;
+    color: var(--primary-color);
     font-size: 12px;
     transform: translateY(-15px);
 }
@@ -221,7 +228,7 @@ form #buttonContainer button[type="submit"]{
 
 /*Extra*/
 #othersignup{
-    margin: 50px 0 50px 0;
+    margin: 50px 0 0 0;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -240,9 +247,9 @@ form #buttonContainer button[type="submit"]{
 }
 
 body #formContainer #login{
-    margin: 30px;
+    margin: 20px;
 }
 body #formContainer #login p,a{
     text-align: center;
-    color: green;
+    color: var(--primary-color);
 }
