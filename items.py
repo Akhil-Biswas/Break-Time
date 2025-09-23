@@ -30,7 +30,7 @@ class Items:
         #defult velue for get item
         self.isfev = False  #only for login user 
         self.totalFev = 0
-        
+    
     def saveItemInDatabase(self):
         try :
             conn= connectToMysqlServer()
@@ -83,19 +83,35 @@ class Items:
     def getAllItem():
         try:
             conn= connectToMysqlServer()
-            cursor = conn.cursor()
+            cursor = conn.cursor(dictionary=True)
             cursor.execute(f"USE {Mysql.MYSQL_DATABASE};")
             
-            query = "SELECT * FROM items"
+            query = '''
+                SELECT items.item_id,
+                items.name,
+                items.price,
+                food_type.type_name,
+                categories.category_name,
+                restaurants.restaurant_name
+                FROM   items
+                JOIN food_type
+                ON items.veg_flag = food_type.type_id
+                JOIN categories
+                ON items.category = categories.category_id
+                JOIN restaurants
+                ON items.restaurant = restaurants.restaurant_id; 
+                '''
             cursor.execute(query)
             items = cursor.fetchall()
+            cursor.close()
+            conn.close()
+            for item in items:
+                item["img"] = f"{item['item_id']}.jpeg"
             return items
         except Exception as e :
             print(e)
-        finally:
-            cursor.close()
-            conn.close()
-if __name__ == "__main__ ":   
+        
+if __name__ == "__main__":
     item1 = Items(
         itemId = None,
         itemName = "samosa",
@@ -112,24 +128,11 @@ if __name__ == "__main__ ":
         vegFlag = 1,
         category ='1',
         restaurant = 1
-    ).saveItemInDatabase()
+    ).saveItemInDatabase
 
     #for display in html
     items=Items.getAllItem()
-
-    for item in items:
-        itemId = item[0],
-        itemName = item[1],
-        itemPrice = item[2],
-        vegFlag = item[3],
-        category = item[4],
-        restaurant = item[5]
-    
-        print(item)
-        print(itemName)
-        print(itemPrice)
-        print(vegFlag)
-        print('=======')
+    print(items)
   
      # {"itemid":"1","name": "Sandwich", "type":"veg","price":"30.00","noFev":"157","img":"sandwich.png"}
  
