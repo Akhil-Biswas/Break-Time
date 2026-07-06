@@ -49,7 +49,9 @@ curl -X POST https://api.akhilbiswas.com/auth/student/register \
 
 ```json
 {
-  "message": "Student registered successfully."
+  "message": "Student registered successfully.",
+  "success": true,
+  "user_id": null
 }
 ```
 

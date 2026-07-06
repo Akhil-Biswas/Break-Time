@@ -111,6 +111,40 @@ class UserRegisterRequest:
 
         return password
 
+class UserRegisterResponse:
+    """Response schema for user registration."""
+
+    def __init__(
+        self,
+        message: str,
+        success: bool,
+        user_id: int | None = None,
+    ) -> None:
+        """
+        Initialize the registration response.
+
+        Args:
+            message: Response message.
+            success: Whether the registration succeeded.
+            user_id: ID of the newly created user, if available.
+        """
+        self.message = message
+        self.success = success
+        self.user_id = user_id
+
+    def to_dict(self) -> dict[str, str | bool | int | None]:
+        """
+        Convert the response object to a dictionary.
+
+        Returns:
+            dict: Dictionary representation of the response.
+        """
+        return {
+            "message": self.message,
+            "success": self.success,
+            "user_id": self.user_id,
+        }
+
 if __name__ == "__main__":
     try:
         user = UserRegisterRequest(
@@ -121,3 +155,10 @@ if __name__ == "__main__":
         print(type(user.phone))
     except ValueError as e:
         print(e)
+
+    response = UserRegisterResponse(
+        message = "Student registered successfully.",
+        success = True,
+        user_id = None
+        )
+    print(response.to_dict())

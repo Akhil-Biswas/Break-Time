@@ -10,7 +10,7 @@ HTTP request/response handling.
 """
 from flask import Blueprint, request
 from flask.typing import ResponseReturnValue
-from .schemas import UserRegisterRequest
+from .schemas import UserRegisterRequest,UserRegisterResponse
 from .service import register_student
 
 # Create a Blueprint named "auth" to organize authentication-related routes.
@@ -33,8 +33,8 @@ def student_register() -> ResponseReturnValue:
 
             user: UserRegisterRequest = UserRegisterRequest(**form_data)
 
-            result : dict[str, str] = register_student(user)
-            return result, 200
+            result : UserRegisterResponse = register_student(user)
+            return result.to_dict(), 200
 
         except ValueError as e:
             return {"error": str(e)}, 400
