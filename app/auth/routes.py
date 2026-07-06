@@ -1,29 +1,70 @@
-from flask import Blueprint
+"""
+app/auth/routes.py
+
+HTTP request/response handling.
+    • Define Flask routes.
+    • Receive HTTP requests.
+    • Call schemas and services.
+    • Render templates.
+    • Return JSON responses or redirects.
+"""
+from flask import Blueprint, request
+from flask.typing import ResponseReturnValue
+from .schemas import UserRegisterRequest
+from .service import register_student
 
 # Create a Blueprint named "auth" to organize authentication-related routes.
 auth = Blueprint("auth", __name__)
 
-@auth.route("/login")
-def login():
+@auth.route("/auth/student/register",
+    methods=["GET", "POST"]
+    )
+def student_register() -> ResponseReturnValue:
     """
-    Handle requests to the login page.
+    Display the registration page or process a registration request.
 
     Returns:
-        str: A placeholder response for the login page.
+        ResponseReturnValue: A Flask response.
+    """
+
+    if request.method == "POST":
+        try:
+            form_data: dict[str, str] = request.form.to_dict()
+
+            user: UserRegisterRequest = UserRegisterRequest(**form_data)
+
+            result : dict[str, str] = register_student(user)
+            return result, 200
+
+        except ValueError as e:
+            return {"error": str(e)}, 400
+
+    return "Signup Page"
+
+
+@auth.route("/auth/login",
+    methods=["GET","POST"]
+    )
+def login() -> ResponseReturnValue:
+    """
+    Display the login page or process a login request.
+
+    Returns:
+        ResponseReturnValue: A Flask response.
     """
     return "Login Page"
 
-
-@auth.route("/signup", methods=["GET", "POST"])
-def signup():
+@auth.route("/auth/logout",
+    methods=["POST"]
+    )
+def logout() -> ResponseReturnValue:
     """
-    Handle requests to the signup page.
-
-    Supports:
-        GET: Display the signup page.
-        POST: Process signup form data (to be implemented).
+    Log out the current user.
 
     Returns:
-        str: A placeholder response for the signup page.
+        ResponseReturnValue: A Flask response.
     """
-    return "signup page"
+    return "Logout Successful"
+
+if __name__ == '__main__':
+    pass
