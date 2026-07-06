@@ -9,27 +9,54 @@ Request and response schemas.
 
 
 class UserRegisterRequest:
-    """Request schema for user registration."""
+    """
+    Request model for user registration.
+
+    This class represents the data submitted by a client when
+    creating a new user account.
+
+    Attributes:
+        f_name: User's first name.
+        m_name: User's middle name (optional).
+        l_name: User's last name.
+        email: User's email address.
+        password: Plain-text password provided by the user.
+        phone: User's phone number.
+        photo: Profile photo URL or file path (optional).
+        address: User's address (optional).
+    """
 
     def __init__(
         self,
-        email: str,
-        phone: str | int,
-        password: str,
+        f_name: str,
+        m_name: str | None = None,
+        l_name: str = "",
+        email: str = "",
+        password: str = "",
+        phone: str = "",
+        photo: str | None = None,
+        #address: str | None = None,
     ) -> None:
         """
-        Initialize and validate user registration data.
+        Initialize a new user registration request.
 
         Args:
+            f_name: User's first name.
+            m_name: User's middle name.
+            l_name: User's last name.
             email: User's email address.
-            phone: User's phone number as a string or integer.
-            password: User's password.
-
-        Raises:
-            ValueError: If any field fails validation.
+            password: Plain-text password.
+            phone: User's phone number.
+            photo: Profile photo URL or path.
+            address: User's address.
         """
+        self.f_name = f_name
+        self.m_name = m_name
+        self.l_name = l_name
         self.email = self._validate_email(email)
         self.phone = self._validate_phone(phone)
+        self.photo = photo
+        #self.address = address
         self.password = self._validate_password(password)
 
     @staticmethod

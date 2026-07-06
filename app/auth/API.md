@@ -19,9 +19,13 @@ User Module
 
 | Field | Type | Required |
 |-------|------|----------|
+| `f_name` | String | Yes |
+| `m_name` | String \| `None` | No |
+| `l_name` | String | Yes |
 | `email` | String | Yes |
-| `phone` | String | Yes |
 | `password` | String | Yes |
+| `phone` | String | Yes |
+| `photo` | String \| `None` | No |
 
 Validation
 
@@ -35,6 +39,18 @@ Validation
 
 ```bash
 curl -X POST https://api.akhilbiswas.com/auth/student/register \
+  -F "f_name=John" \
+  -F "m_name=Michael" \
+  -F "l_name=Doe" \
+  -F "email=john@example.com" \
+  -F "phone=1234567890" \
+  -F "password=Password123" \
+  -F "photo=@/path/to/photo.jpg"
+
+
+curl -X POST https://api.akhilbiswas.com/auth/student/register \
+  -F "f_name=John" \
+  -F "l_name=Doe" \
   -F "email=john@example.com" \
   -F "phone=123-456-7890" \
   -F "password=Password123"
