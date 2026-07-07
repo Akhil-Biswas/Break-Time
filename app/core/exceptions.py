@@ -59,11 +59,13 @@ class AppException(Exception):
         Returns:
             A formatted string containing the exception class name and message.
         """
-        return (
-            f"      {self.RED}{self.BOLD}"
-            f"{self.__class__.__name__}:{self.RESET} "
-            f"{super().__str__()}"
+        output = (
+            f"{self.RED}{self.BOLD}"
+            f"{self.__class__.__name__}: {self.message}"
+            f"{self.RESET}"
         )
+
+        return output
 
     def to_dict(self) -> dict[str, int | str]:
         """
@@ -127,9 +129,46 @@ class InternalServerException(AppException):
     message = "An internal server error occurred."
 
 
+class DatabaseException(AppException):
+    """
+    Base exception for all database-related errors.
+    """
+
+    status_code = 500
+    message = "A database error occurred."
+
+    def __str__(self) -> str:
+        output = (
+            f"{self.RED}{self.BOLD}"
+            f"{self.__class__.__name__}: {self.message}"
+            f"{self.RESET}"
+        )
+
+
+        return output
+class DatabaseConnectionException(DatabaseException):
+    message = "Failed to connect to the database."
+
+
+class DatabaseQueryException(DatabaseException):
+    message = "The database query could not be completed."
+
+
+class DatabaseTransactionException(DatabaseException):
+    message = "The database transaction failed."
+
+
+class DatabaseIntegrityException(DatabaseException):
+    status_code = 409
+    message = "A database integrity constraint was violated."
+
+
+class DatabaseTimeoutException(DatabaseException):
+    status_code = 504
+    message = "The database operation timed out."
+
 if __name__ == "__main__":
     try:
-        raise BadRequestException
+        raise DatabaseIntegrityException
     except AppException as e:
         print(e)
-        print(e.to_dict())
