@@ -5,7 +5,7 @@ from mysql.connector.connection import MySQLConnection
 from mysql.connector.cursor import MySQLCursor
 
 from app.core.config import Database
-from app.core.database import db_connection
+from app.core.database import mysql_connection
 
 
 
@@ -15,7 +15,7 @@ class DatabaseMigration:
     def __init__(self, database_name: str) -> None:
         self.database_name = database_name
 
-        self.conn: MySQLConnection = db_connection()
+        self.conn: MySQLConnection = mysql_connection()
         self.cursor: MySQLCursor = self.conn.cursor()
 
     def create_database(self) -> None:
