@@ -57,8 +57,8 @@ class UserRepository:
                 user.address,
                 user.role_id,
                 user.is_active,
-                datetime.now(),
-                datetime.now(),
+                #datetime.now(), by database
+                #datetime.now(), by database
             ),
         )
         self.conn.commit()

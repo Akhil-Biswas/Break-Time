@@ -34,6 +34,9 @@ def student_register() -> ResponseReturnValue:
             user: UserRegisterRequest = UserRegisterRequest(**form_data)
 
             result : UserRegisterResponse = register_student(user)
+            if result is None:
+                return {"error": "Registration failed"}, 400
+
             return result.to_dict(), 200
 
         except ValueError as e:

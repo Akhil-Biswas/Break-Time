@@ -39,7 +39,7 @@ class Users:
     phone: str = ""
     photo: str | None = None
     address: str |None = None
-    role_id: int = 0
+    role_id: int = 3 # Student
     is_active: bool = True
     created_at: datetime | None = None
     updated_at: datetime | None = None
