@@ -1,9 +1,7 @@
 import mysql.connector
 from app.core.config import Database
 
-from mysql.connector import MySQLConnection
-
-def mysql_connection() -> MySQLConnection:
+def mysql_connection():
     """
     Connect to the MySQL server without selecting a database.
     """
@@ -16,7 +14,7 @@ def mysql_connection() -> MySQLConnection:
     return conn
 
 
-def db_connection() -> MySQLConnection:
+def db_connection():
     """
     Connect to the MySQL server and select the configured database.
     """

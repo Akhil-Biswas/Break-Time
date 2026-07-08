@@ -66,9 +66,9 @@ class BaseResponse:
 
         # Error information
         if error is None:
-            self.error: Any = None
+            self.error = None
         else:
-            self.error: Any = error.__dict__
+            self.error = error.__dict__
 
         # Additional metadata
         self.metadata: Any = metadata
