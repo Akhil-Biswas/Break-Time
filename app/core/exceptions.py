@@ -167,6 +167,9 @@ class DatabaseTimeoutException(DatabaseException):
     status_code = 504
     message = "The database operation timed out."
 
+class ValidationException(AppException):
+    pass
+
 if __name__ == "__main__":
     try:
         raise DatabaseIntegrityException
