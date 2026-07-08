@@ -8,6 +8,9 @@ WORKDIR /Break-Time
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Install mypy for static type checking during GitHub Actions/CI tests
+RUN pip install --no-cache-dir mypy
+
 # Copy project files
 COPY . .
 
