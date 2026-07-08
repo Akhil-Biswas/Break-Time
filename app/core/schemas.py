@@ -10,6 +10,17 @@ consistent API or application responses.
 from typing import Any, Optional
 
 
+class ErrorResponse:
+    def __init__(
+        self,
+        code: str,
+        message: str,
+        details: Optional[list | dict] = None,
+    ) -> None:
+        self.code = code
+        self.message = message
+        self.details = details
+
 class BaseResponse:
     """
     A generic response object.
@@ -26,7 +37,7 @@ class BaseResponse:
         success: bool,
         #message: str,
         data: Optional[dict[str, Any]] = None,
-        error: Optional[dict[str, Any]] = None,
+        error: Optional[ErrorResponse] = None,
         metadata: Optional[Any] = None,
     ) -> None:
         """
@@ -54,7 +65,10 @@ class BaseResponse:
         self.data: Any = data
 
         # Error information
-        self.error: Any = error
+        if error is None:
+            self.error: Any = None
+        else:
+            self.error: Any = error.__dict__
 
         # Additional metadata
         self.metadata: Any = metadata
@@ -104,12 +118,13 @@ if __name__ == "__main__":
             "uid" : 123
         }
 
-    error = {
-        "code" : "UNAUTHORISED",
-        "message" : "you can't access",
-        "details": None
-    }
+    error = ErrorResponse(
+        code = "UNAUTHORISED",
+        message = "you can't access",
+        details = None
+    )
     try:
+        raise ValueError
         response = UserRegisterResponse(
             success = True,
             data = data
@@ -121,29 +136,3 @@ if __name__ == "__main__":
             )
 
     print(json.dumps(response.to_dict()))
-
-    #success
-    """
-    {
-        'success': True,
-        'data': {
-            'name': 'ram',
-            'uid': 123
-        },
-        'error': None,
-        'metadata': None
-    }
-    """
-    # error
-    """
-    {
-        'success': False,
-        'data': None,
-        'error': {
-            'code': 'UNAUTHORISED',
-            'message': "you can't access",
-            'details': None
-        },
-        'metadata': None
-    }
-    """
