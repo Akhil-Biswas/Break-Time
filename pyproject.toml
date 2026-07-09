@@ -1,0 +1,23 @@
+[tool.uv]
+package = false
+
+[project]
+name = "break-time"
+version = "0.1.0"
+description = "Backend API for the Break Time application."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "flask==3.1.2",
+    "dotenv==0.9.9",
+    "mysql-connector-python==9.4.0",
+]
+
+[dependency-groups]
+test = [
+ "pytest>=9.1.1",
+]
+
+dev = [
+    "pipdeptree>=3.1.1",
+]
