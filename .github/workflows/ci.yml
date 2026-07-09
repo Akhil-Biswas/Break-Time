@@ -1,12 +1,13 @@
-name: Type Check
+name: CI
 
 on:
   push:
     branches:
+      - main
       - dev
-      - feat/shared
   pull_request:
     branches:
+      - main
       - dev
 
 jobs:
