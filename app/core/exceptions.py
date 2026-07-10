@@ -8,7 +8,7 @@ application. Each exception contains an HTTP status code and a default
 message, making it suitable for API responses and centralized error handling.
 """
 
-from typing import Any, Optional
+from typing import Any
 
 
 class AppException(Exception):
@@ -34,16 +34,13 @@ class AppException(Exception):
     message: str = "An unexpected error occurred."
     details: Any = None
 
-    RED = "\033[91m"
-    BOLD = "\033[1m"
-    RESET = "\033[0m"
 
     def __init__(
         self,
-        message: Optional[str] = None,
-        status_code: Optional[int] = None,
-        code: Optional[str] = None,
-        details: Any | None = None,
+        message: str | None = None,
+        status_code: int | None = None,
+        code: str | None = None,
+        details: Any = None,
     ) -> None:
         """
         Initialize an application exception.
@@ -80,16 +77,12 @@ class AppException(Exception):
 
     def __str__(self) -> str:
         """
-        Return a colored string representation of the exception.
+        Return the exception message.
 
         Returns:
-            A formatted string containing the exception class name and message.
+            The human-readable error message.
         """
-        return (
-            f"{self.RED}{self.BOLD}"
-            f"{self.__class__.__name__}: {self.message}"
-            f"{self.RESET}"
-        )
+        return self.message
 
     def to_dict(self) -> dict[str, Any]:
         """
@@ -106,11 +99,15 @@ class AppException(Exception):
 
 
 class ClientException(AppException):
-    pass
+    status_code = 400
+    code = "CLIENT_ERROR"
+    message = "A client error occurred."
 
 
 class ServerException(AppException):
-    pass
+    status_code = 500
+    code = "SERVER_ERROR"
+    message = "A server error occurred."
 
 # ---------------------------------------------------------------------
 # Client exceptions
@@ -121,6 +118,7 @@ class BadRequestException(ClientException):
     """Exception raised for malformed or invalid client requests."""
 
     status_code = 400
+    code = "BAD_REQUEST"
     message = "The request was invalid."
 
 
@@ -145,6 +143,7 @@ class UnauthorizedException(ClientException):
     """Exception raised when authentication fails or is missing."""
 
     status_code = 401
+    code = "UNAUTHORIZED"
     message = "Authentication is required or has failed."
 
 
@@ -152,6 +151,7 @@ class ForbiddenException(ClientException):
     """Exception raised when the authenticated user lacks permission."""
 
     status_code = 403
+    code = "FORBIDDEN"
     message = "You do not have permission to perform this action."
 
 
@@ -159,6 +159,7 @@ class NotFoundException(ClientException):
     """Exception raised when a requested resource cannot be found."""
 
     status_code = 404
+    code = "NOT_FOUND"
     message = "The requested resource was not found."
 
 
@@ -166,6 +167,7 @@ class ConflictException(ClientException):
     """Exception raised when a request conflicts with the current resource state."""
 
     status_code = 409
+    code = "CONFLICT"
     message = "The request conflicts with the current state of the resource."
 
 
@@ -173,6 +175,7 @@ class UnprocessableEntityException(ClientException):
     """Exception raised when request validation fails."""
 
     status_code = 422
+    code = "UNPROCESSABLE_ENTITY"
     message = "The request was well-formed but semantically invalid."
 
 
@@ -185,6 +188,7 @@ class InternalServerException(ServerException):
     """Exception raised for unexpected server-side failures."""
 
     status_code = 500
+    code = "INTERNAL_SERVER_ERROR"
     message = "An internal server error occurred."
 
 
@@ -194,29 +198,35 @@ class DatabaseException(ServerException):
     """
 
     status_code = 500
+    code = "DATABASE_ERROR"
     message = "A database error occurred."
 
 
 class DatabaseConnectionException(DatabaseException):
     status_code = 503
+    code = "DATABASE_CONNECTION_ERROR"
     message = "Failed to connect to the database."
 
 
 class DatabaseQueryException(DatabaseException):
+    code = "DATABASE_QUERY_ERROR"
     message = "The database query could not be completed."
 
 
 class DatabaseTransactionException(DatabaseException):
+    code = "DATABASE_TRANSACTION_ERROR"
     message = "The database transaction failed."
 
 
 class DatabaseIntegrityException(DatabaseException):
     status_code = 409
+    code = "DATABASE_INTEGRITY_ERROR"
     message = "A database integrity constraint was violated."
 
 
 class DatabaseTimeoutException(DatabaseException):
     status_code = 504
+    code = "DATABASE_TIMEOUT"
     message = "The database operation timed out."
 
 
@@ -226,3 +236,4 @@ if __name__ == "__main__":
     except ValidationException as e:
         print(e)
         print(e.to_dict())
+    raise ValidationException("email","invalid email")
