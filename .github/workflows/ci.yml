@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+  pull_request:
+    branches:
+      - main
+      - dev
+
+jobs:
+  type-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Build image from your Dockerfile — this creates the environment
+      - name: Build Docker image
+        run: docker build -t myapp:typecheck .
+
+      # mypy must be installed inside the Dockerfile for this to work
+      - name: Run type check inside container
+        run: docker run --rm myapp:typecheck mypy .
