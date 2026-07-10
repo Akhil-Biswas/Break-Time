@@ -13,13 +13,14 @@ from app.core.exceptions import AppException
 
 class BaseResponse:
     """
-    A generic response object.
+    Represents a standardized response for API or application operations.
 
     Attributes:
-        success (bool): Indicates whether the operation was successful.
-        data (Any): The response data.
-        error (Any): Error details if the operation failed.
-        metadata (Any): Additional information about the response.
+        success (bool): Indicates whether the operation succeeded.
+        data (dict[str, Any] | None): Response payload.
+        error (dict[str, Any] | None): Serialized error information.
+        metadata (Any): Additional response metadata.
+
     """
 
     def __init__(
@@ -35,10 +36,28 @@ class BaseResponse:
 
         Args:
             success (bool): True if the operation succeeded.
-            data (Any, optional): Response payload.
-            error (Any, optional): Error information.
+            data (dict[str, Any], optional): Response payload.
+            error (AppException, optional): Error information.
             metadata (Any, optional): Extra response metadata.
+
+        Raises:
+            TypeError:
+                If `success` is not a boolean, `data` is not a dictionary,
+                or `error` is not an AppException.
+            ValueError:
+                If a successful response contains an error or a failed
+                response contains data.
         """
+
+
+        if not isinstance(success, bool):
+            raise TypeError("success must be a boolean.")
+
+        if error is not None and not isinstance(error, AppException):
+            raise TypeError("error must be an AppException.")
+
+        if data is not None and not isinstance(data, dict):
+            raise TypeError("data must be a dictionary.")
 
         if success and error is not None:
             raise ValueError("Successful response cannot contain an error.")
