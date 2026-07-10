@@ -8,18 +8,8 @@ consistent API or application responses.
 """
 
 from typing import Any, Optional
+from app.core.exceptions import AppException
 
-
-class ErrorResponse:
-    def __init__(
-        self,
-        code: str,
-        message: str,
-        details: Optional[list | dict] = None,
-    ) -> None:
-        self.code = code
-        self.message = message
-        self.details = details
 
 class BaseResponse:
     """
@@ -37,7 +27,7 @@ class BaseResponse:
         success: bool,
         #message: str,
         data: Optional[dict[str, Any]] = None,
-        error: Optional[ErrorResponse] = None,
+        error: Optional[AppException] = None,
         metadata: Optional[Any] = None,
     ) -> None:
         """
@@ -68,7 +58,7 @@ class BaseResponse:
         if error is None:
             self.error = None
         else:
-            self.error = error.__dict__
+            self.error = error.to_dict()
 
         # Additional metadata
         self.metadata: Any = metadata
