@@ -214,17 +214,17 @@ Exception
 
 ```txt
 Exception
-└── Error
-    ├── Warning
+├── mysql.connector.errors.Warning
+└── mysql.connector.errors.Error
     ├── InterfaceError
-    └── DatabaseError
-        ├── DataError
-        ├── OperationalError
-        ├── IntegrityError
-        ├── InternalError
-        ├── ProgrammingError
-        ├── NotSupportedError
-        └── PoolError
+    ├── DatabaseError
+    │   ├── DataError
+    │   ├── IntegrityError
+    │   ├── OperationalError
+    │   ├── ProgrammingError
+    │   ├── InternalError
+    │   └── NotSupportedError
+    └── PoolError
 ```
 ### MySQL Connector Exception Mapping
 
@@ -234,7 +234,7 @@ Exception
 | `InterfaceError` | Errors related to the database interface, such as connection establishment or communication failures. | `DatabaseConnectionException` | **![503](https://img.shields.io/badge/503-orange) Service Unavailable** |
 | `DataError` | Invalid or out-of-range data values (e.g., numeric overflow, data truncation). | `DatabaseQueryException` | **![500](https://img.shields.io/badge/500-orange) Internal Server Error** |
 | `OperationalError` *(Connection Failure)* | Database server unavailable, lost connection, or network-related errors. | `DatabaseConnectionException` | **![503](https://img.shields.io/badge/503-orange) Service Unavailable** |
-| `OperationalError` *(Timeout)* | Database operation exceeded the configured timeout. | `DatabaseTimeoutException` | **![503](https://img.shields.io/badge/503-orange) Service Unavailable** or **![504](https://img.shields.io/badge/504-orange) Gateway Timeout** |
+| `OperationalError` *(Timeout)* | Database operation exceeded the configured timeout. | `DatabaseTimeoutException` | **![503](https://img.shields.io/badge/503-orange) Service Unavailable** |
 | `OperationalError` *(Transaction Failure)* | Transaction failed due to deadlock or rollback conditions. | `DatabaseTransactionException` | **![500](https://img.shields.io/badge/500-orange) Internal Server Error** |
 | `OperationalError` *(Other)* | Other operational failures not covered by a specific category. | `DatabaseQueryException` | **![500](https://img.shields.io/badge/500-orange) Internal Server Error** |
 | `IntegrityError` | Constraint violations such as duplicate keys, unique constraints, or foreign key violations. | `DatabaseIntegrityException` | **![409](https://img.shields.io/badge/409-red) Conflict** |
