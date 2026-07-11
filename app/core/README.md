@@ -1,21 +1,39 @@
 # Exception
 
 ```txt
-Exception
-└── AppException
-    ├── BadRequestException
-    ├── UnauthorizedException
-    ├── ForbiddenException
-    ├── NotFoundException
-    ├── ConflictException
-    ├── UnprocessableEntityException
-    ├── InternalServerException
+AppException
+│
+├── ClientException (4xx)
+│   │
+│   ├── BadRequestException (400)
+│   │
+│   ├── ValidationException (400/422)
+│   │
+│   ├── UnauthorizedException (401)
+│   │
+│   ├── ForbiddenException (403)
+│   │
+│   ├── NotFoundException (404)
+│   │
+│   ├── ConflictException (409)
+│   │
+│   └── UnprocessableEntityException (422)
+│
+└── ServerException (5xx)
+    │
+    ├── InternalServerException (500)
+    │
     └── DatabaseException
-        ├── DatabaseConnectionException
-        ├── DatabaseQueryException
-        ├── DatabaseTransactionException
-        ├── DatabaseIntegrityException
-        └── DatabaseTimeoutException
+        │
+        ├── DatabaseConnectionException (503)
+        │
+        ├── DatabaseQueryException (500)
+        │
+        ├── DatabaseTransactionException (500)
+        │
+        ├── DatabaseIntegrityException (409 or 500)
+        │
+        └── DatabaseTimeoutException (503 or 504)
 ```
 ## Use case
 
