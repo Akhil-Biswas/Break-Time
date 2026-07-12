@@ -10,7 +10,9 @@ Database access layer
 from datetime import datetime
 from typing import Optional
 
-from app.core.database import db_connection
+from mysql.connector import errors
+from app.core.database import translate_mysql_exception
+
 
 from .queries import (
     CREATE_USER,
@@ -25,13 +27,13 @@ from .models import Users
 
 class UserRepository:
     """Provides CRUD operations for the users table."""
-    def __init__(self):
+    def __init__(self, conn):
         """Initialize a database connection."""
-        self.conn = db_connection()
-    
-    def close(self):
-        """Close the database connection."""
-        self.conn.close()
+        self.conn = conn
+
+    def _new_cursor(self):
+        """Return a new database cursor."""
+        return self.conn.cursor()
 
     def create_user(self, user: Users) -> int:
         """
@@ -43,26 +45,32 @@ class UserRepository:
         Returns:
             The ID of the newly created user.
         """
-        cursor = self.conn.cursor()
-        cursor.execute(
-                CREATE_USER,
-            (
-                user.f_name,
-                user.m_name,
-                user.l_name,
-                user.email,
-                user.password_hash,
-                user.phone,
-                user.photo,
-                user.address,
-                user.role_id,
-                user.is_active,
-                #datetime.now(), by database
-                #datetime.now(), by database
-            ),
-        )
-        self.conn.commit()
-        return cursor.lastrowid
+        try:
+            cursor = self._new_cursor()
+            cursor.execute(
+                    CREATE_USER,
+                (
+                    user.f_name,
+                    user.m_name,
+                    user.l_name,
+                    user.email,
+                    user.password_hash,
+                    user.phone,
+                    user.photo,
+                    user.address,
+                    user.role_id,
+                    user.is_active,
+                    #datetime.now(), by database
+                    #datetime.now(), by database
+                ),
+            )
+            self.conn.commit()
+            return cursor.lastrowid
+        except errors.Error as e:
+            translate_mysql_exception(e)
+        finally:
+            if cursor is not None:
+                cursor.close()
 
     def get_by_id(self, user_id: int) -> Optional[Users]:
         """
@@ -74,14 +82,20 @@ class UserRepository:
         Returns:
             A Users object if found, otherwise None.
         """
-        cursor = self.conn.cursor()
-        cursor.execute(GET_USER_BY_ID, (user_id,))
-        row = cursor.fetchone()
+        try:
+            cursor = self._new_cursor()
+            cursor.execute(GET_USER_BY_ID, (user_id,))
+            row = cursor.fetchone()
 
-        if row is None:
-            return None
+            if row is None:
+                return None
 
-        return Users(**dict(row))
+            return Users(**dict(row))
+        except errors.Error as e:
+            translate_mysql_exception(e)
+        finally:
+            if cursor is not None:
+                cursor.close()
 
     def get_by_email(self, email: str) -> Optional[Users]:
         """
@@ -93,14 +107,20 @@ class UserRepository:
         Returns:
             A Users object if found, otherwise None.
         """
-        cursor = self.conn.cursor()
-        cursor.execute(GET_USER_BY_EMAIL, (email,))
-        row = cursor.fetchone()
+        try:
+            cursor = self._new_cursor()
+            cursor.execute(GET_USER_BY_EMAIL, (email,))
+            row = cursor.fetchone()
 
-        if row is None:
-            return None
+            if row is None:
+                return None
 
-        return Users(**dict(row))
+            return Users(**dict(row))
+        except errors.Error as e:
+            translate_mysql_exception(e)
+        finally:
+            if cursor is not None:
+                cursor.close()
 
     def get_all_users(self) -> list[Users]:
         """
@@ -109,10 +129,16 @@ class UserRepository:
         Returns:
             A list of Users objects.
         """
-        cursor = self.conn.cursor(dictionary=True)
-        cursor.execute(GET_ALL_USER)
+        try:
+            cursor = self.conn.cursor(dictionary=True)
+            cursor.execute(GET_ALL_USER)
 
-        return [Users(**dict(row)) for row in cursor.fetchall()]
+            return [Users(**dict(row)) for row in cursor.fetchall()]
+        except errors.Error as e:
+            translate_mysql_exception(e)
+        finally:
+            if cursor is not None:
+                cursor.close()
 
     # UPDATE USER
 
@@ -130,14 +156,20 @@ class UserRepository:
         Returns:
             True if a record was updated, otherwise False.
         """
-        cursor = self.conn.cursor()
-        cursor.execute(
-            SOFT_DELETE_USER,
-            (datetime.now(), user_id),
-        )
+        try:
+            cursor = self.conn.cursor()
+            cursor.execute(
+                SOFT_DELETE_USER,
+                (datetime.now(), user_id),
+            )
 
-        self.conn.commit()
-        return cursor.rowcount > 0
+            self.conn.commit()
+            return cursor.rowcount > 0
+        except errors.Error as e:
+            translate_mysql_exception(e)
+        finally:
+            if cursor is not None:
+                cursor.close()
 
     def restore_user(self, user_id: int) -> bool:
         """
@@ -149,24 +181,20 @@ class UserRepository:
         Returns:
             True if the user was restored, otherwise False.
         """
-        cursor = self.conn.cursor()
-        cursor.execute(
-            RESTORE_USER,
-            (user_id,),
-        )
+        try:
+            cursor = self.conn.cursor()
+            cursor.execute(
+                RESTORE_USER,
+                (user_id,),
+            )
 
-        self.conn.commit()
-        return cursor.rowcount > 0
-        
+            self.conn.commit()
+            return cursor.rowcount > 0
+        except errors.Error as e:
+            translate_mysql_exception(e)
+        finally:
+            if cursor is not None:
+                cursor.close()
+
 if __name__ == "__main__":
-
-    repo = UserRepository()
-
-    users = repo.get_all()
-
-    #for user in users:
-    #    print(user)
-    
-    print(users[0].f_name)
-
-    repo.close()
+    pass

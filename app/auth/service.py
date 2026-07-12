@@ -8,6 +8,10 @@ from .schemas import (UserRegisterRequest,
     )
 from .models import Users
 from .repository import UserRepository
+from app.core.database import db_connection
+from app.core.exceptions import ( DatabaseConnectionException,
+    DatabaseIntegrityException
+)
 
 def register_student(user: UserRegisterRequest) -> UserRegisterResponse:
     """
@@ -36,8 +40,13 @@ def register_student(user: UserRegisterRequest) -> UserRegisterResponse:
     )
     # 4. Save the user to the database.
     print(db_user.to_dict())
+
+    conn = None
     try:
-        repo : UserRepository = UserRepository()
+        conn = db_connection()
+        print("------------Conneced to database------------")
+        repo : UserRepository = UserRepository(conn)
+
         created_user : int = repo.create_user(db_user)
 
         # 5. Send a Confirmation
@@ -49,8 +58,16 @@ def register_student(user: UserRegisterRequest) -> UserRegisterResponse:
             success = True,
             user_id = created_user
         )
+    except DatabaseConnectionException as e:
+        print("DatabaseException:", type(e), e)
+
+    except DatabaseIntegrityException as e:
+        print("DatabaseIntegrityException:", type(e), e)
+
     except Exception as e:
-        print(e)
-        #raise
+        print("Other:", type(e), e)
+
     finally:
-        repo.close()
+        print("------------Service End------------")
+        if conn is not None:
+            conn.close()
