@@ -1,3 +1,5 @@
+from typing import NoReturn
+
 import mysql.connector
 from app.core.config import Database
 from mysql.connector import errors
@@ -16,35 +18,45 @@ def mysql_connection():
     """
     Connect to the MySQL server without selecting a database.
     """
-    conn = mysql.connector.connect(
-        host=Database.MYSQL_HOST,
-        port=Database.MYSQL_PORT,
-        user=Database.MYSQL_USER,
-        password=Database.MYSQL_PASSWORD,
-    )
-    return conn
+    try:
+        conn = mysql.connector.connect(
+            host=Database.MYSQL_HOST,
+            port=Database.MYSQL_PORT,
+            user=Database.MYSQL_USER,
+            password=Database.MYSQL_PASSWORD,
+        )
+        return conn
+    except errors.Error as e:
+        translate_mysql_exception(e)
+    except Exception as e:
+        raise InternalServerException(str(e)) from e
 
 
 def db_connection():
     """
     Connect to the MySQL server and select the configured database.
     """
-    conn = mysql.connector.connect(
-        host=Database.MYSQL_HOST,
-        port=Database.MYSQL_PORT,
-        user=Database.MYSQL_USER,
-        password=Database.MYSQL_PASSWORD,
-        database=Database.MYSQL_DATABASE,
-    )
-    return conn
+    try:
+        conn = mysql.connector.connect(
+            host=Database.MYSQL_HOST,
+            port=Database.MYSQL_PORT,
+            user=Database.MYSQL_USER,
+            password=Database.MYSQL_PASSWORD,
+            database=Database.MYSQL_DATABASE,
+        )
+        return conn
+    except errors.Error as e:
+        translate_mysql_exception(e)
+    except Exception as e:
+        raise InternalServerException(str(e)) from e
 
-def translate_mysql_exception(exc: errors.Error) -> None:
+def translate_mysql_exception(exc: errors.Error) -> NoReturn:
     """
     Convert MySQL Connector exceptions into application exceptions.
     """
 
     if not isinstance(exc, errors.Error):
-        raise TypeError(f'{str(exc)} is not mysql.connector.errors.Error')
+        raise TypeError(f"Expected mysql.connector.errors.Error, got {type(exc).__name__}")
 
    # --- InterfaceError: connection could not be established / communication failure
     # errno 2003 = Can't connect to MySQL server
@@ -105,18 +117,18 @@ def translate_mysql_exception(exc: errors.Error) -> None:
         raise DatabaseQueryException(str(exc)) from exc
 
     # Base class for all mysql.connector exceptions
-    if isinstance(exc, errors.Error):
-        raise DatabaseException(str(exc)) from exc
+    raise DatabaseException(str(exc)) from exc
 
 if __name__ == "__main__":
-    # Without database
-    conn = mysql_connection()
-    if conn.is_connected():
-        print("Connected to MySQL Server.")
-    conn.close()
+    try:
+        conn = mysql_connection()
+        if conn.is_connected():
+            print("Connected to MySQL Server.")
+        conn.close()
 
-    # With database
-    db_conn = db_connection()
-    if db_conn.is_connected():
-        print(f"Connected to database: {Database.MYSQL_DATABASE}")
-    db_conn.close()
+        db_conn = db_connection()
+        if db_conn.is_connected():
+            print(f"Connected to database: {Database.MYSQL_DATABASE}")
+        db_conn.close()
+    except DatabaseException as e:
+        print(f"Database error: {e.message}")
