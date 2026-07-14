@@ -185,3 +185,211 @@ app/auth/
 10. `routes.py` returns the response to the client.
 
 ---
+
+# Authentication
+
+The Authentication module is responsible for user identity management, account lifecycle, and access control. It provides secure mechanisms for registration, authentication, password management, and role-based authorization.
+
+## Responsibilities
+
+- User registration
+- User authentication (Login/Logout)
+- Password hashing and verification
+- Password reset and recovery
+- OTP verification
+- Token generation and validation
+- Profile management
+- Session management
+- Role-based access control (RBAC)
+
+---
+
+# Exceptions
+
+The module defines custom exceptions to represent authentication, authorization, and account-related business errors. These exceptions enable the service layer to communicate meaningful failures while keeping database and HTTP implementation details separate.
+
+## Exception Hierarchy
+
+```text
+app.auth.exceptions
+ConflictException
+├── UserAlreadyExistsException
+│   ├── EmailAlreadyExistsException
+│   └── PhoneAlreadyExistsException
+├── PasswordMismatchException
+└── PasswordReuseException
+
+NotFoundException
+└── UserNotFoundException
+
+UnauthorizedException
+├── InvalidCredentialsException
+├── AccountNotVerifiedException
+├── InvalidOtpException
+├── OtpExpiredException
+├── InvalidTokenException
+└── TokenExpiredException
+
+ForbiddenException
+├── PermissionDeniedException
+├── InsufficientPrivilegesException
+├── AccountDisabledException
+└── AccountLockedException
+```
+
+## Exception Reference
+
+| Exception | Description |
+|-----------|-------------|
+| `UserAlreadyExistsException` | Base exception raised when a user already exists. |
+| `EmailAlreadyExistsException` | Raised when the supplied email address is already registered. |
+| `PhoneAlreadyExistsException` | Raised when the supplied phone number is already registered. |
+| `UserNotFoundException` | Raised when the requested user cannot be found. |
+| `InvalidCredentialsException` | Raised when authentication fails because the provided credentials are invalid. |
+| `AccountNotVerifiedException` | Raised when a user attempts to authenticate before verifying their account. |
+| `AccountDisabledException` | Raised when an account has been disabled by an administrator. |
+| `AccountLockedException` | Raised when an account is temporarily locked due to security policies. |
+| `InvalidOtpException` | Raised when an invalid one-time password (OTP) is provided. |
+| `OtpExpiredException` | Raised when the submitted OTP has expired. |
+| `InvalidTokenException` | Raised when an authentication or password reset token is invalid or malformed. |
+| `TokenExpiredException` | Raised when an authentication or password reset token has expired. |
+| `PasswordMismatchException` | Raised when the new password and its confirmation do not match. |
+| `PasswordReuseException` | Raised when the new password matches a previously used password. |
+| `PermissionDeniedException` | Raised when an authenticated user attempts an action they are not permitted to perform. |
+| `InsufficientPrivilegesException` | Raised when the user's role or privileges are insufficient to perform the requested operation. |
+---
+
+# Role-Based Access Control (RBAC)
+
+The application implements Role-Based Access Control (RBAC) to ensure that users can access only the resources and operations permitted by their assigned role.
+
+## Role Hierarchy
+
+```mermaid
+graph TD
+    Guest --> Student
+    Student --> CR["Class Representative (CR)"]
+    CR --> HOD["Head of Department (HOD)"]
+    HOD --> Admin
+    Restaurant
+```
+
+> **Note**
+>
+> The **Restaurant** role is independent of the academic hierarchy. It manages food items and customer orders but has no administrative authority over students, CRs, HODs, or other academic resources.
+
+## Role Definitions
+
+### Guest
+
+An unauthenticated visitor.
+
+**Permissions**
+
+- Browse restaurants.
+- Search food items.
+- View menus.
+- Add or remove items from the shopping cart.
+- Register a student account.
+- Register a restaurant account.
+- Login.
+- Request password recovery.
+
+---
+
+### Student
+
+An authenticated student.
+
+**Permissions**
+
+- All Guest permissions.
+- Place food orders.
+- View personal order history.
+- Cancel eligible orders.
+- Manage personal profile.
+- Change password.
+- Logout.
+
+---
+
+### Class Representative (CR)
+
+A student assigned to represent a section.
+
+**Additional Permissions**
+
+- View the total number of orders placed by students in their assigned section.
+- View section-level order statistics.
+- Temporarily activate or deactivate students within their assigned section.
+
+---
+
+### Head of Department (HOD)
+
+Department administrator.
+
+**Additional Permissions**
+
+- Create, update, and manage sections.
+- Assign or remove Class Representatives.
+- View department-wide order statistics.
+- View total orders and total items ordered within the department.
+- Manage department profile.
+
+---
+
+### Restaurant
+
+Restaurant owner or manager.
+
+**Permissions**
+
+- Manage restaurant profile.
+- Add menu items.
+- Update menu items.
+- Delete menu items.
+- Manage menu availability.
+- Receive customer orders.
+- Accept or reject orders.
+- Update order status.
+- View restaurant order history.
+
+---
+
+### Administrator
+
+System administrator.
+
+**Permissions**
+
+- Full system access.
+- Manage all users.
+- Manage restaurants.
+- Manage departments and sections.
+- Assign or revoke user roles.
+- Activate or deactivate any account.
+- View all orders and reports.
+- Configure system settings.
+- Audit system activities.
+
+---
+
+## Permission Matrix
+
+| Permission | Guest | Student | CR | HOD | Restaurant | Admin |
+|------------|:-----:|:-------:|:--:|:---:|:----------:|:-----:|
+| Browse restaurants | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ |
+| Search food | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ |
+| Manage shopping cart | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ |
+| Place orders | ❌ | ✅ | ✅ | ✅ | ❌ | ✅ |
+| View personal orders | ❌ | ✅ | ✅ | ✅ | ❌ | ✅ |
+| Manage profile | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| View section statistics | ❌ | ❌ | ✅ | ✅ | ❌ | ✅ |
+| Manage students in section | ❌ | ❌ | ✅ | ✅ | ❌ | ✅ |
+| Manage sections | ❌ | ❌ | ❌ | ✅ | ❌ | ✅ |
+| Assign or remove CR | ❌ | ❌ | ❌ | ✅ | ❌ | ✅ |
+| Manage restaurant menu | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Process restaurant orders | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Manage all users | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Configure system settings | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ |
